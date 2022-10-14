@@ -42,6 +42,7 @@ class ViewModel {
         })
     }
 
+    // Atualiza o account
     func getTokenInformation() {
         API().getTokenInformation(completion: { result in
             switch result {
@@ -57,4 +58,23 @@ class ViewModel {
             }
         })
     }
+
+    // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
+    func getAirportRoutes() {
+        API().getRoutes(completion: { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let serialization = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    print(serialization)
+//                    self.account = try JSONDecoder().decode(Account.self, from: data)
+                } catch {
+                    print(error)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+
 }

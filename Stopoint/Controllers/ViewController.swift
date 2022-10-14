@@ -23,14 +23,24 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    var getRoutesButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("get Routes", for: .normal)
+        button.configuration = .filled()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tokenText)
         view.addSubview(getAccessTokenButton)
+        view.addSubview(getRoutesButton)
         setConstraints()
 
         getAccessTokenButton.addTarget(self, action: #selector(self.getTokenInformation), for: .touchUpInside)
+        getRoutesButton.addTarget(self, action: #selector(self.getAirportRoutes), for: .touchUpInside)
 
         viewModel = ViewModel(account: Account(clientId: "", token: "", expireTokenTime: 0))
         generateToken()
@@ -46,8 +56,13 @@ class ViewController: UIViewController {
             getAccessTokenButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             getAccessTokenButton.topAnchor.constraint(equalTo: tokenText.bottomAnchor, constant: 20)
         ]
+        let getRoutesButtonConstraints = [
+            getRoutesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            getRoutesButton.topAnchor.constraint(equalTo: getAccessTokenButton.bottomAnchor, constant: 20)
+        ]
         NSLayoutConstraint.activate(tokenTextConstraints)
         NSLayoutConstraint.activate(getAccesTokenButtonConstraints)
+        NSLayoutConstraint.activate(getRoutesButtonConstraints)
     }
 
     // Gera um token de acesso
@@ -58,6 +73,10 @@ class ViewController: UIViewController {
     // Captura o token de acesso já gerado
     @objc func getTokenInformation() {
         viewModel!.getTokenInformation()
+    }
+    
+    @objc func getAirportRoutes() {
+        viewModel!.getAirportRoutes()
     }
 }
 
