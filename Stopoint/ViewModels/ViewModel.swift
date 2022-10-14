@@ -15,9 +15,11 @@ class ViewModel {
 
     var viewModelDelegate: ViewModelDelegate?
     var account: Account
+    var routes: Routes?
 
-    init(account: Account) {
+    init(account: Account, routes: Routes? = nil) {
         self.account = account
+        self.routes = routes
     }
 
     // Gera um token de aceso para a API e manda para a Controller
@@ -26,13 +28,11 @@ class ViewModel {
             switch result {
             case .success(let data):
                 do {
-                    let _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.account = try JSONDecoder().decode(Account.self, from: data)
+                    print(self.account.token)
                     let token = Data(self.account.token.utf8)
                     KeychainHelper.standard.save(data: token, service: "access-token", account: "amadeus")
-                    DispatchQueue.main.async {
-                        self.viewModelDelegate?.fetchAccessToken(token: self.account.token)
-                    }
                 } catch {
                     print(error)
                 }
@@ -42,12 +42,13 @@ class ViewModel {
         })
     }
 
-    func getTokenInformation() {
+    // Atualiza o account
+    func updateTokenInformation() {
         API().getTokenInformation(completion: { result in
             switch result {
             case .success(let data):
                 do {
-                    let _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.account = try JSONDecoder().decode(Account.self, from: data)
                 } catch {
                     print(error)
@@ -57,4 +58,27 @@ class ViewModel {
             }
         })
     }
+
+    // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
+    func getAirportRoutes() {
+        self.updateTokenInformation()
+        if account.expireTokenTime < 10 {
+            self.generateAccessToken()
+        }
+
+        API().getRoutes(completion: { result in
+            switch result {
+            case .success(let data):
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    self.routes = try JSONDecoder().decode(Routes.self, from: data)
+                } catch {
+                    print(error)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+
 }

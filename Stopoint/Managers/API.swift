@@ -22,21 +22,24 @@ class API {
         executeRequest(urlRequest: request, completion: completion)
     }
 
+    // função responsável por atualizar informações de token
     func getTokenInformation(completion: @escaping (Result<Data, Error>) -> Void) {
         let url = Url.urlGetTokenInformation
         let request = URLRequest(url: url)
         executeRequest(urlRequest: request, completion: completion)
     }
 
+    // função responsável por pegar todas as rotas partindo de Fortaleza
     func getRoutes(completion: @escaping (Result<Data, Error>) -> Void) {
         let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
         let accessToken = String(data: token, encoding: .utf8)!
         let url = Url.urlAirportRoutes
         var request = URLRequest(url: url)
-        request.addValue("Baerer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         executeRequest(urlRequest: request, completion: completion)
     }
 
+    // Executa a requisição para a API
     func executeRequest(urlRequest: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
 
