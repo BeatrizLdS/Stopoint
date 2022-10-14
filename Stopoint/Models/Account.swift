@@ -10,7 +10,7 @@ import Foundation
 struct Account: Decodable {
     var clientId: String
     var token: String
-    var expireTokenTime : Int
+    var expireTokenTime: Int
 
     enum CodingKeys: String, CodingKey {
         case clientId = "client_id"
