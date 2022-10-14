@@ -15,9 +15,11 @@ class ViewModel {
 
     var viewModelDelegate: ViewModelDelegate?
     var account: Account
+    var routes: Routes?
 
-    init(account: Account) {
+    init(account: Account, routes: Routes? = nil) {
         self.account = account
+        self.routes = routes
     }
 
     // Gera um token de aceso para a API e manda para a Controller
@@ -68,8 +70,8 @@ class ViewModel {
             switch result {
             case .success(let data):
                 do {
-                    let serialization = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    print(serialization)
+                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    self.routes = try JSONDecoder().decode(Routes.self, from: data)
                 } catch {
                     print(error)
                 }
