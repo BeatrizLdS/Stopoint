@@ -21,7 +21,7 @@
 		FFB3D2D828F822A3005EAAF5 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2D728F822A3005EAAF5 /* URL.swift */; };
 		FFB3D2DD28F852A0005EAAF5 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2DC28F852A0005EAAF5 /* ViewModel.swift */; };
 		FFB3D2DF28F852BE005EAAF5 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2DE28F852BE005EAAF5 /* Account.swift */; };
-		FFB3D2E128F86759005EAAF5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2E028F86759005EAAF5 /* Keychain.swift */; };
+		FFB3D2E328F97816005EAAF5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2E228F97816005EAAF5 /* Keychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,7 @@
 		FFB3D2D728F822A3005EAAF5 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		FFB3D2DC28F852A0005EAAF5 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		FFB3D2DE28F852BE005EAAF5 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		FFB3D2E028F86759005EAAF5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		FFB3D2E228F97816005EAAF5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				FFB3D2D528F82294005EAAF5 /* API.swift */,
-				FFB3D2E028F86759005EAAF5 /* Keychain.swift */,
+				FFB3D2E228F97816005EAAF5 /* Keychain.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -351,9 +351,9 @@
 				FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */,
 				FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */,
 				FFB3D2D628F82294005EAAF5 /* API.swift in Sources */,
+				FFB3D2E328F97816005EAAF5 /* Keychain.swift in Sources */,
 				FFB3D2DF28F852BE005EAAF5 /* Account.swift in Sources */,
 				FFB3D2D828F822A3005EAAF5 /* URL.swift in Sources */,
-				FFB3D2E128F86759005EAAF5 /* Keychain.swift in Sources */,
 				FFB3D2DD28F852A0005EAAF5 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

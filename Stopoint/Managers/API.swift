@@ -9,8 +9,8 @@ import Foundation
 
 // Requisições relacionadas com as rotas (origem -> destino) / Origem = Fortaleza
 class API {
-    
-    //função responsável por gerar um token de acesso na API
+
+    // função responsável por gerar um token de acesso na API
     func generateToken(completion: @escaping (Result<Data, Error>) -> Void) {
         let url = Url.urlGenerateAcessToken
         let parameters = "client_id=WfGVetIoPk0AtwIvrRL5Aok1FYThwOmd&client_secret=kGJpPg4z6WMFmAAo&grant_type=client_credentials"
@@ -19,6 +19,12 @@ class API {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = postData
+        executeRequest(urlRequest: request, completion: completion)
+    }
+
+    func getTokenInformation(completion: @escaping (Result<Data, Error>) -> Void) {
+        let url = Url.urlGetTokenInformation
+        let request = URLRequest(url: url)
         executeRequest(urlRequest: request, completion: completion)
     }
 
@@ -32,7 +38,7 @@ class API {
     }
 
     func executeRequest(urlRequest: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
 
             guard let data = data, error == nil else {
                 completion(.failure(error!))

@@ -35,4 +35,14 @@ struct Url {
         urlComponents.query = "departureAirportCode=FOR"
         return urlComponents.url!
     }
+
+    // Url para informação do token existente
+    //https://test.api.amadeus.com/v1/security/oauth2/token/<access-token>
+    static var urlGetTokenInformation: URL {
+        var urlComponents = urlBase
+        let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
+        let accessToken = String(data: token, encoding: .utf8)!
+        urlComponents.path = "/v1/security/oauth2/token/\(accessToken)"
+        return urlComponents.url!
+    }
 }
