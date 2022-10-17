@@ -39,8 +39,19 @@ class API {
         executeRequest(urlRequest: request, completion: completion)
     }
 
+    // Função que executa pesquisa de voos mais baratos para uma ocnfiguração de voo
+    func getFlightOffers(flight: Flight, completion: @escaping (Result<Data, Error>) -> Void) {
+        let url = Url.getUrlFlightOffersSearch(flight: flight)
+        var request = URLRequest(url: url)
+        let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
+        let accessToken = String(data: token, encoding: .utf8)!
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        executeRequest(urlRequest: request, completion: completion)
+        
+    }
+
     // Executa a requisição para a API
-    func executeRequest(urlRequest: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
+    private func executeRequest(urlRequest: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
 
             guard let data = data, error == nil else {

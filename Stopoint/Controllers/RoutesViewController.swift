@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    var viewModel: ViewModel?
+class RoutesViewController: UIViewController {
+    var viewModel: RoutesViewModel?
 
     var getRoutesButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("get Routes", for: .normal)
+        button.setTitle("get flights", for: .normal)
         button.configuration = .filled()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -20,8 +20,8 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel = ViewModel(account: Account(clientId: "", token: "", expireTokenTime: 0))
-        viewModel!.generateAccessToken()
+        viewModel = RoutesViewModel(account: Account(clientId: "", token: "", expireTokenTime: 0))
+        viewModel!.getAirportRoutes()
     }
 
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         view.addSubview(getRoutesButton)
         setConstraints()
 
-        getRoutesButton.addTarget(self, action: #selector(self.getAirportRoutes), for: .touchUpInside)
+        getRoutesButton.addTarget(self, action: #selector(self.nextPage), for: .touchUpInside)
     }
 
     func setConstraints() {
@@ -40,7 +40,11 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate(getRoutesButtonConstraints)
     }
 
-    @objc func getAirportRoutes() {
-        viewModel!.getAirportRoutes()
+    @objc func nextPage() {
+        viewModel?.verifyToken()
+        let nextViewController =  FlightOffersViewController()
+        let flight = Flight(originLocation: "FOR", destinationLocation: (viewModel?.routes?.routes?[0].iataCode)!, departureDate: "2022-11-01", adults: 2)
+        nextViewController.viewModel.flight = flight
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
 }

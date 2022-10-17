@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */; };
 		FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29D28F820DE005EAAF5 /* SceneDelegate.swift */; };
-		FFB3D2A028F820DE005EAAF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29F28F820DE005EAAF5 /* ViewController.swift */; };
+		FFB3D2A028F820DE005EAAF5 /* RoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29F28F820DE005EAAF5 /* RoutesViewController.swift */; };
 		FFB3D2A328F820DE005EAAF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFB3D2A128F820DE005EAAF5 /* Main.storyboard */; };
 		FFB3D2A628F820DE005EAAF5 /* Stopoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2A428F820DE005EAAF5 /* Stopoint.xcdatamodeld */; };
 		FFB3D2A828F820DF005EAAF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFB3D2A728F820DF005EAAF5 /* Assets.xcassets */; };
@@ -19,10 +19,14 @@
 		FFB3D2C228F820DF005EAAF5 /* StopointUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2C128F820DF005EAAF5 /* StopointUITestsLaunchTests.swift */; };
 		FFB3D2D628F82294005EAAF5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2D528F82294005EAAF5 /* API.swift */; };
 		FFB3D2D828F822A3005EAAF5 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2D728F822A3005EAAF5 /* URL.swift */; };
-		FFB3D2DD28F852A0005EAAF5 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2DC28F852A0005EAAF5 /* ViewModel.swift */; };
+		FFB3D2DD28F852A0005EAAF5 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2DC28F852A0005EAAF5 /* RoutesViewModel.swift */; };
 		FFB3D2DF28F852BE005EAAF5 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2DE28F852BE005EAAF5 /* Account.swift */; };
 		FFB3D2E328F97816005EAAF5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2E228F97816005EAAF5 /* Keychain.swift */; };
 		FFB3D2E628F9A9BA005EAAF5 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2E528F9A9BA005EAAF5 /* Locations.swift */; };
+		FFB3D2E828FD8457005EAAF5 /* FlightOffersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2E728FD8457005EAAF5 /* FlightOffersViewModel.swift */; };
+		FFB3D2EA28FD84FC005EAAF5 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2E928FD84FC005EAAF5 /* Flight.swift */; };
+		FFB3D2EC28FD859E005EAAF5 /* FlightOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2EB28FD859E005EAAF5 /* FlightOffersViewController.swift */; };
+		FFB3D2EE28FD93F4005EAAF5 /* Offers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2ED28FD93F4005EAAF5 /* Offers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +50,7 @@
 		FFB3D29828F820DE005EAAF5 /* Stopoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stopoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFB3D29D28F820DE005EAAF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FFB3D29F28F820DE005EAAF5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FFB3D29F28F820DE005EAAF5 /* RoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewController.swift; sourceTree = "<group>"; };
 		FFB3D2A228F820DE005EAAF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFB3D2A528F820DE005EAAF5 /* Stopoint.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stopoint.xcdatamodel; sourceTree = "<group>"; };
 		FFB3D2A728F820DF005EAAF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,10 +63,14 @@
 		FFB3D2C128F820DF005EAAF5 /* StopointUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopointUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FFB3D2D528F82294005EAAF5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		FFB3D2D728F822A3005EAAF5 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
-		FFB3D2DC28F852A0005EAAF5 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		FFB3D2DC28F852A0005EAAF5 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
 		FFB3D2DE28F852BE005EAAF5 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		FFB3D2E228F97816005EAAF5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		FFB3D2E528F9A9BA005EAAF5 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
+		FFB3D2E728FD8457005EAAF5 /* FlightOffersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightOffersViewModel.swift; sourceTree = "<group>"; };
+		FFB3D2E928FD84FC005EAAF5 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
+		FFB3D2EB28FD859E005EAAF5 /* FlightOffersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightOffersViewController.swift; sourceTree = "<group>"; };
+		FFB3D2ED28FD93F4005EAAF5 /* Offers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +176,8 @@
 			children = (
 				FFB3D2DE28F852BE005EAAF5 /* Account.swift */,
 				FFB3D2E528F9A9BA005EAAF5 /* Locations.swift */,
+				FFB3D2E928FD84FC005EAAF5 /* Flight.swift */,
+				FFB3D2ED28FD93F4005EAAF5 /* Offers.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,7 +185,8 @@
 		FFB3D2D128F82124005EAAF5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				FFB3D2DC28F852A0005EAAF5 /* ViewModel.swift */,
+				FFB3D2DC28F852A0005EAAF5 /* RoutesViewModel.swift */,
+				FFB3D2E728FD8457005EAAF5 /* FlightOffersViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -191,7 +202,8 @@
 		FFB3D2D328F8213F005EAAF5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FFB3D29F28F820DE005EAAF5 /* ViewController.swift */,
+				FFB3D29F28F820DE005EAAF5 /* RoutesViewController.swift */,
+				FFB3D2EB28FD859E005EAAF5 /* FlightOffersViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -349,16 +361,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFB3D2A028F820DE005EAAF5 /* ViewController.swift in Sources */,
+				FFB3D2A028F820DE005EAAF5 /* RoutesViewController.swift in Sources */,
+				FFB3D2E828FD8457005EAAF5 /* FlightOffersViewModel.swift in Sources */,
 				FFB3D2A628F820DE005EAAF5 /* Stopoint.xcdatamodeld in Sources */,
 				FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */,
+				FFB3D2EC28FD859E005EAAF5 /* FlightOffersViewController.swift in Sources */,
 				FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */,
 				FFB3D2D628F82294005EAAF5 /* API.swift in Sources */,
 				FFB3D2E328F97816005EAAF5 /* Keychain.swift in Sources */,
+				FFB3D2EE28FD93F4005EAAF5 /* Offers.swift in Sources */,
 				FFB3D2DF28F852BE005EAAF5 /* Account.swift in Sources */,
 				FFB3D2E628F9A9BA005EAAF5 /* Locations.swift in Sources */,
+				FFB3D2EA28FD84FC005EAAF5 /* Flight.swift in Sources */,
 				FFB3D2D828F822A3005EAAF5 /* URL.swift in Sources */,
-				FFB3D2DD28F852A0005EAAF5 /* ViewModel.swift in Sources */,
+				FFB3D2DD28F852A0005EAAF5 /* RoutesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

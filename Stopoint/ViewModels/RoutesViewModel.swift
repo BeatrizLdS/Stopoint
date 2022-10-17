@@ -11,7 +11,7 @@ protocol ViewModelDelegate {
     func fetchAccessToken(token: String)
 }
 
-class ViewModel {
+class RoutesViewModel {
 
     var viewModelDelegate: ViewModelDelegate?
     var account: Account
@@ -30,7 +30,6 @@ class ViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.account = try JSONDecoder().decode(Account.self, from: data)
-                    print(self.account.token)
                     let token = Data(self.account.token.utf8)
                     KeychainHelper.standard.save(data: token, service: "access-token", account: "amadeus")
                 } catch {
@@ -59,12 +58,17 @@ class ViewModel {
         })
     }
 
-    // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
-    func getAirportRoutes() {
+    // Função que verifica o token e atualiza caso necessário
+    func verifyToken() {
         self.updateTokenInformation()
         if account.expireTokenTime < 10 {
             self.generateAccessToken()
         }
+    }
+
+    // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
+    func getAirportRoutes() {
+        verifyToken()
 
         API().getRoutes(completion: { result in
             switch result {
