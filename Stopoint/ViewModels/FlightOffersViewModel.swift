@@ -34,4 +34,24 @@ class FlightOffersViewModel {
             }
         })
     }
+
+    func getDetails() {
+        for (file) in (offers!.dictionaries!.locations) {
+            API().getLocationByKeyword(keyword: file.key, city: file.value, completion: {result in
+                switch result {
+                case .success(let data):
+                    do {
+                        let serialization = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                        print(serialization)
+//                        self.offers = try JSONDecoder().decode(Offers.self, from: data)
+//                        print(self.offers)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
+    }
 }

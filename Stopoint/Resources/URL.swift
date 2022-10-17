@@ -61,7 +61,8 @@ struct Url {
         var urlComponents = urlBase
         urlComponents.path = "/v1/reference-data/locations"
         let typeInformation = "subType=CITY,AIRPORT"
-        let locationInformations = "&keyword=\(key)&countryCode=\(city.countryCode)"
+//        let locationInformations = "&keyword=\(key)&countryCode=\(city.countryCode)"
+        let locationInformations = "&keyword=AMS"
         urlComponents.query = "\(typeInformation)\(locationInformations)"
         return urlComponents.url!
     }
