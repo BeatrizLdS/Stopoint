@@ -11,7 +11,6 @@ import Foundation
 struct Url {
 
     // Cria o componente base da url
-    //https://test.api.amadeus.com
     static var urlBase: URLComponents {
         var components = URLComponents()
         components.scheme = "https"
@@ -20,7 +19,6 @@ struct Url {
     }
 
     // Gera URL para gerar um token de acesso
-    //https://test.api.amadeus.com/v1/security/oauth2/token
     static var urlGenerateAcessToken: URL {
         var urlComponents = urlBase
         urlComponents.path = "/v1/security/oauth2/token"
@@ -28,7 +26,6 @@ struct Url {
     }
 
     // Url para informação do token existente
-    //https://test.api.amadeus.com/v1/security/oauth2/token/<access-token>
     static var urlGetTokenInformation: URL {
         var urlComponents = urlBase
         let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
@@ -38,7 +35,6 @@ struct Url {
     }
 
     // Url para capturar os voos partindo de fortaleza
-    //https://test.api.amadeus.com/v1/airport/direct-destinations?departureAirportCode=FOR
     static var urlAirportRoutes: URL {
         var urlComponents = urlBase
         urlComponents.path = "/v1/airport/direct-destinations"
@@ -57,4 +53,8 @@ struct Url {
         urlComponents.query = "\(originDestination)\(date)\(persons)\(othersInformetions)"
         return urlComponents.url!
     }
+    
+    //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=MUC&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL
+    // Gera URL para obter informações dos locais
+    
 }
