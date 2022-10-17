@@ -47,7 +47,6 @@ class API {
         let accessToken = String(data: token, encoding: .utf8)!
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         executeRequest(urlRequest: request, completion: completion)
-        
     }
 
     // Executa a requisição para a API

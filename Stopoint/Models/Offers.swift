@@ -29,12 +29,6 @@ struct Dictionaries: Decodable {
     let locations: [String: City]
 }
 
-// Estrutura da cidade
-struct City: Decodable {
-    let cityCode: String
-    let countryCode: String
-}
-
 // Estrura que armazena a rota completa mais detalhada
 struct Itinerarie: Decodable {
     var segments: [Segment]?

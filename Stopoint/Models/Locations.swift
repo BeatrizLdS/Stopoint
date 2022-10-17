@@ -19,3 +19,9 @@ struct Location: Decodable {
     var iataCode: String?
     var name: String?
 }
+
+// Estrutura da cidade
+struct City: Decodable {
+    let cityCode: String
+    let countryCode: String
+}

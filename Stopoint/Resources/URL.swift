@@ -46,15 +46,23 @@ struct Url {
     static func getUrlFlightOffersSearch(flight: Flight) -> URL {
         var urlComponents = urlBase
         urlComponents.path = "/v2/shopping/flight-offers"
-        let originDestination = "originLocationCode=\(flight.originLocation)&destinationLocationCode=\(flight.destinationLocation)"
+        let origin = "originLocationCode=\(flight.originLocation)"
+        let destination = "&destinationLocationCode=\(flight.destinationLocation)"
         let date = "&departureDate=\(flight.departureDate)"
         let persons = "&adults=\(flight.adults)&children=\(flight.childrens)"
         let othersInformetions = "&nonStop=false&currencyCode=BRL&max=1"
-        urlComponents.query = "\(originDestination)\(date)\(persons)\(othersInformetions)"
+        urlComponents.query = "\(origin)\(destination)\(date)\(persons)\(othersInformetions)"
         return urlComponents.url!
     }
-    
-    //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=MUC&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL
+
+    //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=MUC&countryCode=DE
     // Gera URL para obter informações dos locais
-    
+    static func getUrlLocationSearch(key: String, city: City) -> URL {
+        var urlComponents = urlBase
+        urlComponents.path = "/v1/reference-data/locations"
+        let typeInformation = "subType=CITY,AIRPORT"
+        let locationInformations = "&keyword=\(key)&countryCode=\(city.countryCode)"
+        urlComponents.query = "\(typeInformation)\(locationInformations)"
+        return urlComponents.url!
+    }
 }
