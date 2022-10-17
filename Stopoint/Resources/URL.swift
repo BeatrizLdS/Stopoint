@@ -45,4 +45,17 @@ struct Url {
         urlComponents.query = "departureAirportCode=FOR"
         return urlComponents.url!
     }
+
+    // Gera URL para o consumo da rota de pesquisa de voos mais baratos
+    // https://test.api.amadeus.com/v2/shopping/flight-offers? originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2022-11-01&returnDate=2022-11-18&adults=2&max=1
+    static func getUrlFlightOffersSearch(flight: Flight) -> URL {
+        var urlComponents = urlBase
+        urlComponents.path = "/v2/shopping/flight-offers"
+        let originDestination = "originLocationCode=\(flight.originLocation)&destinationLocationCode=\(flight.destinationLocation)"
+        let date = "&departureDate=\(flight.departureDate)"
+        let persons = "&adults=\(flight.adults)&children=\(flight.childrens)"
+        let othersInformetions = "&nonStop=false&currencyCode=BRL&max=1"
+        urlComponents.query = "\(originDestination)\(date)\(persons)\(othersInformetions)"
+        return urlComponents.url!
+    }
 }
