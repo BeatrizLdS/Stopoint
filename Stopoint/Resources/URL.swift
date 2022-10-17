@@ -57,7 +57,7 @@ struct Url {
 
     //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=MUC&countryCode=DE
     // Gera URL para obter informações dos locais
-    static func getUrlLocationSearch(key: String, city: City) -> URL {
+    static func getUrlLocationByKeyword(key: String, city: City) -> URL {
         var urlComponents = urlBase
         urlComponents.path = "/v1/reference-data/locations"
         let typeInformation = "subType=CITY,AIRPORT"

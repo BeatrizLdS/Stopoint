@@ -49,6 +49,16 @@ class API {
         executeRequest(urlRequest: request, completion: completion)
     }
 
+    // Função que busca descrição de códigos de lugares
+    func getLocationByKeyword(keyword: String, city: City, completion: @escaping (Result<Data, Error>) -> Void) {
+        let url = Url.getUrlLocationByKeyword(key: keyword, city: city)
+        var request = URLRequest(url: url)
+        let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
+        let accessToken = String(data: token, encoding: .utf8)!
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        executeRequest(urlRequest: request, completion: completion)
+    }
+
     // Executa a requisição para a API
     private func executeRequest(urlRequest: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
