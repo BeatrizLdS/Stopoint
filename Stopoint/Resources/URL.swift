@@ -47,7 +47,6 @@ struct Url {
     }
 
     // Gera URL para o consumo da rota de pesquisa de voos mais baratos
-    // https://test.api.amadeus.com/v2/shopping/flight-offers? originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2022-11-01&returnDate=2022-11-18&adults=2&max=1
     static func getUrlFlightOffersSearch(flight: Flight) -> URL {
         var urlComponents = urlBase
         urlComponents.path = "/v2/shopping/flight-offers"

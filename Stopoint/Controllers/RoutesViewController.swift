@@ -43,7 +43,10 @@ class RoutesViewController: UIViewController {
     @objc func nextPage() {
         viewModel?.verifyToken()
         let nextViewController =  FlightOffersViewController()
-        let flight = Flight(originLocation: "FOR", destinationLocation: (viewModel?.routes?.routes?[0].iataCode)!, departureDate: "2022-11-01", adults: 2)
+        let flight = Flight(originLocation: "FOR",
+                            destinationLocation: (viewModel?.routes?.routes?[0].iataCode)!,
+                            departureDate: "2022-11-01",
+                            adults: 2)
         nextViewController.viewModel.flight = flight
         navigationController?.pushViewController(nextViewController, animated: true)
     }
