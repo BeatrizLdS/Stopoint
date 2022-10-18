@@ -14,61 +14,15 @@ protocol ViewModelDelegate {
 class RoutesViewModel {
 
     var viewModelDelegate: ViewModelDelegate?
-    var account: Account
     var routes: Routes?
 
-    init(account: Account, routes: Routes? = nil) {
-        self.account = account
+    init(routes: Routes? = nil) {
         self.routes = routes
-    }
-
-    // Gera um token de aceso para a API e manda para a Controller
-    func generateAccessToken() {
-        API().generateToken(completion: { result in
-            switch result {
-            case .success(let data):
-                do {
-                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    self.account = try JSONDecoder().decode(Account.self, from: data)
-                    let token = Data(self.account.token.utf8)
-                    KeychainHelper.standard.save(data: token, service: "access-token", account: "amadeus")
-                } catch {
-                    print(error)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        })
-    }
-
-    // Atualiza o account
-    func updateTokenInformation() {
-        API().getTokenInformation(completion: { result in
-            switch result {
-            case .success(let data):
-                do {
-                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    self.account = try JSONDecoder().decode(Account.self, from: data)
-                } catch {
-                    print(error)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        })
-    }
-
-    // Função que verifica o token e atualiza caso necessário
-    func verifyToken() {
-        self.updateTokenInformation()
-        if account.expireTokenTime < 10 {
-            self.generateAccessToken()
-        }
     }
 
     // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
     func getAirportRoutes() {
-        verifyToken()
+        Token.verifyToken()
 
         API().getRoutes(completion: { result in
             switch result {
@@ -76,6 +30,7 @@ class RoutesViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.routes = try JSONDecoder().decode(Routes.self, from: data)
+                    print(self.routes)
                 } catch {
                     print(error)
                 }

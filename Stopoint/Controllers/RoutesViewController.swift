@@ -20,7 +20,7 @@ class RoutesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel = RoutesViewModel(account: Account(clientId: "", token: "", expireTokenTime: 0))
+        viewModel = RoutesViewModel()
         viewModel!.getAirportRoutes()
     }
 
@@ -41,7 +41,7 @@ class RoutesViewController: UIViewController {
     }
 
     @objc func nextPage() {
-        viewModel?.verifyToken()
+        Token.verifyToken()
         let nextViewController =  FlightOffersViewController()
         let flight = Flight(originLocation: "FOR",
                             destinationLocation: (viewModel?.routes?.routes?[0].iataCode)!,

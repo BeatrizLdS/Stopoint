@@ -15,7 +15,21 @@ struct Routes: Decodable {
     }
 }
 
+// Estrutura que armazena a localização
 struct Location: Decodable {
     var iataCode: String?
     var name: String?
+    var geoCode: GeoCode?
+}
+
+// Estrutura da localização geográfica
+struct GeoCode: Decodable {
+    var latitude: Double?
+    var longitude: Double?
+}
+
+// Estrutura da cidade
+struct City: Decodable {
+    let cityCode: String
+    let countryCode: String
 }

@@ -47,7 +47,17 @@ class API {
         let accessToken = String(data: token, encoding: .utf8)!
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         executeRequest(urlRequest: request, completion: completion)
-        
+    }
+
+    // Função que busca descrição de códigos de lugares
+    func getCityByKeyword(city: City, completion: @escaping (Result<Data, Error>) -> Void) {
+        let url = Url.getUrlLocationByKeyword(city: city)
+        var request = URLRequest(url: url)
+        let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
+        let accessToken = String(data: token, encoding: .utf8)!
+        request.addValue("application/vnd.amadeus+json", forHTTPHeaderField: "accept")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        executeRequest(urlRequest: request, completion: completion)
     }
 
     // Executa a requisição para a API

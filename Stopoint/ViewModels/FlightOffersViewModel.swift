@@ -29,8 +29,29 @@ class FlightOffersViewModel {
                     print(error.localizedDescription)
                 }
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         })
+    }
+
+    // Função que pega o nome da cidade e localização de cada cidade
+    func getCityDetails() {
+        var list = offers!.dictionaries!.locations
+        for (file) in (list) {
+            API().getCityByKeyword(city: file.value) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                        let options = try JSONDecoder().decode(Routes.self, from: data)
+                        let officialCity = options.routes?.first(where: {$0.iataCode == file.value.cityCode})
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
