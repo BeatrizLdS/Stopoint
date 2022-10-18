@@ -50,8 +50,8 @@ class API {
     }
 
     // Função que busca descrição de códigos de lugares
-    func getLocationByKeyword(keyword: String, city: City, completion: @escaping (Result<Data, Error>) -> Void) {
-        let url = Url.getUrlLocationByKeyword(key: keyword, city: city)
+    func getCityByKeyword(city: City, completion: @escaping (Result<Data, Error>) -> Void) {
+        let url = Url.getUrlLocationByKeyword(city: city)
         var request = URLRequest(url: url)
         let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
         let accessToken = String(data: token, encoding: .utf8)!

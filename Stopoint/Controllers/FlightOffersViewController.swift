@@ -38,8 +38,8 @@ class FlightOffersViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(getRoutesButtonConstraints)
     }
-    
+
     @objc func getDetails() {
-        viewModel.getDetails()
+        viewModel.getCityDetails()
     }
 }

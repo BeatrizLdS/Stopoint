@@ -30,6 +30,7 @@ class RoutesViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.routes = try JSONDecoder().decode(Routes.self, from: data)
+                    print(self.routes)
                 } catch {
                     print(error)
                 }

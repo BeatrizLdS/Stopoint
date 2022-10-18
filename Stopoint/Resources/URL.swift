@@ -55,15 +55,14 @@ struct Url {
         return urlComponents.url!
     }
 
-    //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=MUC&countryCode=DE
+    //https://test.api.amadeus.com/v1/reference-data/locations/cities?countryCode=BR&keyword=RIO&max=10
     // Gera URL para obter informações dos locais
-    static func getUrlLocationByKeyword(key: String, city: City) -> URL {
+    static func getUrlLocationByKeyword(city: City) -> URL {
         var urlComponents = urlBase
-        urlComponents.path = "/v1/reference-data/locations"
-        let typeInformation = "subType=CITY,AIRPORT"
-//        let locationInformations = "&keyword=\(key)&countryCode=\(city.countryCode)"
-        let locationInformations = "&keyword=AMS"
-        urlComponents.query = "\(typeInformation)\(locationInformations)"
+        urlComponents.path = "/v1/reference-data/locations/cities"
+        let country = "countryCode=\(city.countryCode)"
+        let keyword = "&keyword=\(city.cityCode)"
+        urlComponents.query = "\(country)\(keyword)&max=30"
         return urlComponents.url!
     }
 }

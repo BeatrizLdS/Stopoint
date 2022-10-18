@@ -25,33 +25,33 @@ class FlightOffersViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.offers = try JSONDecoder().decode(Offers.self, from: data)
-                    print(self.offers)
                 } catch {
                     print(error.localizedDescription)
                 }
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         })
     }
 
-    func getDetails() {
-        for (file) in (offers!.dictionaries!.locations) {
-            API().getLocationByKeyword(keyword: file.key, city: file.value, completion: {result in
+    // Função que pega o nome da cidade e localização de cada cidade
+    func getCityDetails() {
+        var list = offers!.dictionaries!.locations
+        for (file) in (list) {
+            API().getCityByKeyword(city: file.value) { result in
                 switch result {
                 case .success(let data):
                     do {
-                        let serialization = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                        print(serialization)
-//                        self.offers = try JSONDecoder().decode(Offers.self, from: data)
-//                        print(self.offers)
+                        _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                        let options = try JSONDecoder().decode(Routes.self, from: data)
+                        let officialCity = options.routes?.first(where: {$0.iataCode == file.value.cityCode})
                     } catch {
                         print(error.localizedDescription)
                     }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
-            })
+            }
         }
     }
 }
