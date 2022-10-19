@@ -27,7 +27,7 @@ class RouteTableViewCell: UITableViewCell {
     private var airplaneImage: UIImageView = {
         let image = UIImageView(image: UIImage(systemName: "airplane"))
         image.tintColor = .systemCyan
-        image.contentMode = .center
+        image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -48,8 +48,28 @@ class RouteTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
+    // Função que adiciona efeito nos estados isSelect
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        if self.isSelected {
+            selectedBackgroundView?.backgroundColor = .clear
+            // Todas essas animações rodam em paralelo
+            UIView.animate(withDuration: 0.5) {
+                self.containerStackView.transform = CGAffineTransform(scaleX: 1.03, y: 1.03)
+                self.containerStackView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+            UIView.animate(withDuration: 0.5) {
+                self.containerStackView.layer.borderWidth = 4
+                self.containerStackView.layer.borderWidth = 2
+            }
+            UIView.animate(withDuration: 0.5) {
+                self.airplaneImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.airplaneImage.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            }
+            isSelected = false
+        } else {
+            containerStackView.layer.borderWidth = 1
+        }
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,6 +81,7 @@ class RouteTableViewCell: UITableViewCell {
         self.containerStackView.addArrangedSubview(airplaneImage)
         self.containerStackView.addArrangedSubview(destinyLabel)
         setConstraints()
+        self.selectionStyle = .none
     }
 
     required init?(coder: NSCoder) {
