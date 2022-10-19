@@ -11,9 +11,11 @@ class RoutesViewController: UIViewController {
     var viewModel: RoutesViewModel?
 
     var avaliableRoutesTable: UITableView = {
-        let table = UITableView(frame: .zero, style: .insetGrouped)
+        let table = UITableView()
+        table.separatorStyle = .none
         table.backgroundColor = .systemBackground
-        table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier) // registra célula
+        // registra célula
+        table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
         return table
     }()
 
@@ -25,9 +27,10 @@ class RoutesViewController: UIViewController {
         return button
     }()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel = RoutesViewModel()
+    // Função chamada na primeira vez que a view vai ser criada
+    override func loadView() {
+        super.loadView()
+        viewModel = RoutesViewModel(routes: Routes())
         viewModel!.getAirportRoutes()
     }
 
@@ -39,6 +42,7 @@ class RoutesViewController: UIViewController {
         view.addSubview(avaliableRoutesTable)
         avaliableRoutesTable.delegate = self
         avaliableRoutesTable.dataSource = self
+        viewModel?.viewModelDelegate = self
     }
 
     override func viewDidLayoutSubviews() {
@@ -71,7 +75,12 @@ extension RoutesViewController: UITableViewDataSource {
 
     // Número de linhas em cada seção
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel!.numberOfRows ?? 1
+        self.viewModel!.numberOfRows ?? 0
+    }
+
+    // Define a altura
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
 
     // Define os dados de cada célula e que. é a célula
@@ -79,12 +88,20 @@ extension RoutesViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RouteTableViewCell.identifier, for: indexPath) as? RouteTableViewCell else {
             return UITableViewCell()
         }
-        cell.originLabel.text = "origin"
-        cell.destinyLabel.text = "destiny"
+        cell.originLabel.text = "Fortaleza"
+        cell.destinyLabel.text = viewModel?.loadCurrentRoute(indexPath: indexPath).name?.capitalizeFirstLetter()
         return cell
     }
 }
 
 extension RoutesViewController: UITableViewDelegate {
 
+}
+
+extension RoutesViewController: ViewModelDelegate {
+    func fetchDatas() {
+        DispatchQueue.main.async {
+            self.avaliableRoutesTable.reloadData()
+        }
+    }
 }

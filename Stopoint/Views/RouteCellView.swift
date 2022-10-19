@@ -37,22 +37,19 @@ class RouteTableViewCell: UITableViewCell {
         stack.axis = .horizontal
         stack.backgroundColor = .clear
         stack.layer.cornerRadius = 10
-        stack.alignment = .center
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 10
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor.systemCyan.cgColor
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -63,6 +60,7 @@ class RouteTableViewCell: UITableViewCell {
         self.containerStackView.addArrangedSubview(originLabel)
         self.containerStackView.addArrangedSubview(airplaneImage)
         self.containerStackView.addArrangedSubview(destinyLabel)
+        setConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -71,17 +69,20 @@ class RouteTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        setConstraints()
     }
 
     private func setConstraints() {
         let containerStackViewConstraints = [
-            containerStackView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-            containerStackView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
-            containerStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            containerStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+            containerStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            containerStackView.heightAnchor.constraint(equalToConstant: 50),
+            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ]
+        let airplaneImageConstraints = [
+            airplaneImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ]
+        NSLayoutConstraint.activate(airplaneImageConstraints)
         NSLayoutConstraint.activate(containerStackViewConstraints)
     }
-
 }

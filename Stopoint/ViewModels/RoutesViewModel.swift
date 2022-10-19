@@ -8,24 +8,25 @@
 import Foundation
 
 protocol ViewModelDelegate {
-    func fetchAccessToken(token: String)
+    func fetchDatas()
 }
 
 class RoutesViewModel {
 
     var viewModelDelegate: ViewModelDelegate?
-    private var routes: Routes?
+    private var routes: Routes
 
-    init(routes: Routes? = nil) {
+    init(routes: Routes) {
         self.routes = routes
+        self.routes.routes = []
     }
 
     var numberOfRows: Int? {
-        return (self.routes?.routes?.count)
+        return (self.routes.routes?.count)
     }
 
     func loadCurrentRoute(indexPath: IndexPath) -> Location {
-        return (self.routes?.routes?[indexPath.row])!
+        return (self.routes.routes?[indexPath.row])!
     }
 
     // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
@@ -38,7 +39,7 @@ class RoutesViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.routes = try JSONDecoder().decode(Routes.self, from: data)
-                    print(self.routes)
+                    self.viewModelDelegate?.fetchDatas()
                 } catch {
                     print(error)
                 }
