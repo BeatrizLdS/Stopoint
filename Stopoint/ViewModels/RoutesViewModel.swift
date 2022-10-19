@@ -14,10 +14,18 @@ protocol ViewModelDelegate {
 class RoutesViewModel {
 
     var viewModelDelegate: ViewModelDelegate?
-    var routes: Routes?
+    private var routes: Routes?
 
     init(routes: Routes? = nil) {
         self.routes = routes
+    }
+
+    var numberOfRows: Int? {
+        return (self.routes?.routes?.count)
+    }
+
+    func loadCurrentRoute(indexPath: IndexPath) -> Location {
+        return (self.routes?.routes?[indexPath.row])!
     }
 
     // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
