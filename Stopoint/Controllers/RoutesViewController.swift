@@ -88,8 +88,8 @@ extension RoutesViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RouteTableViewCell.identifier, for: indexPath) as? RouteTableViewCell else {
             return UITableViewCell()
         }
-        cell.originLabel.text = "Fortaleza"
-        cell.destinyLabel.text = viewModel?.loadCurrentRoute(indexPath: indexPath).name?.capitalizeFirstLetter()
+        cell.routeComponent.originLabel.text = "Fortaleza"
+        cell.routeComponent.destinyLabel.text = viewModel?.loadCurrentRoute(indexPath: indexPath).name?.capitalizeFirstLetter()
         return cell
     }
 
