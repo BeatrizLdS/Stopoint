@@ -92,6 +92,17 @@ extension RoutesViewController: UITableViewDataSource {
         cell.destinyLabel.text = viewModel?.loadCurrentRoute(indexPath: indexPath).name?.capitalizeFirstLetter()
         return cell
     }
+
+    // Função que define a ação da seleção de uma linha
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
+            let location = (self.viewModel?.loadCurrentRoute(indexPath: indexPath))!
+            let nextViewModel = FormViewModel(location: location)
+            let nextController = FormViewController()
+            nextController.viewModel = nextViewModel
+            self.navigationController?.pushViewController(nextController, animated: true)
+        })
+    }
 }
 
 extension RoutesViewController: UITableViewDelegate {

@@ -60,15 +60,13 @@ class RouteTableViewCell: UITableViewCell {
             }
             UIView.animate(withDuration: 0.5) {
                 self.containerStackView.layer.borderWidth = 4
-                self.containerStackView.layer.borderWidth = 2
+                self.containerStackView.layer.borderWidth = 1
             }
             UIView.animate(withDuration: 0.5) {
                 self.airplaneImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                 self.airplaneImage.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             }
             isSelected = false
-        } else {
-            containerStackView.layer.borderWidth = 1
         }
     }
 
