@@ -7,13 +7,9 @@
 
 import Foundation
 
-protocol ViewModelDelegate {
-    func fetchDatas()
-}
-
 class RoutesViewModel {
 
-    var viewModelDelegate: ViewModelDelegate?
+    var delegate: DataDelegate?
     private var routes: Routes
 
     init(routes: Routes) {
@@ -21,10 +17,12 @@ class RoutesViewModel {
         self.routes.routes = []
     }
 
+    // Variável que determina o número de linhas que vai ter na table
     var numberOfRows: Int? {
         return (self.routes.routes?.count)
     }
 
+    // Retorna a rota que possui um determinado index
     func loadCurrentRoute(indexPath: IndexPath) -> Location {
         return (self.routes.routes?[indexPath.row])!
     }
@@ -39,7 +37,7 @@ class RoutesViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.routes = try JSONDecoder().decode(Routes.self, from: data)
-                    self.viewModelDelegate?.fetchDatas()
+                    self.delegate?.updateDatas()
                 } catch {
                     print(error.localizedDescription)
                 }

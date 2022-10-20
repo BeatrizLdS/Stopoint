@@ -7,15 +7,11 @@
 
 import Foundation
 
-protocol FormViewModelDelegate {
-    func updateRoute(destiny: String)
-}
-
 class FormViewModel {
 
     var location: Location?
 
-    var delegate: FormViewModelDelegate?
+    var delegate: RoutesDelegate?
 
     init(location: Location? = nil) {
         self.location = location

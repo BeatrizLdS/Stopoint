@@ -34,6 +34,7 @@
 		FFB3D2F428FEE7B5005EAAF5 /* RouteCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */; };
 		FFF8F80129007BE400A0D778 /* RouteViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */; };
 		FFF8F8032901721700A0D778 /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F8022901721700A0D778 /* Warning.swift */; };
+		FFF8F80629018E5900A0D778 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80529018E5900A0D778 /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCellView.swift; sourceTree = "<group>"; };
 		FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewComponent.swift; sourceTree = "<group>"; };
 		FFF8F8022901721700A0D778 /* Warning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
+		FFF8F80529018E5900A0D778 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			children = (
 				FFB3D2D728F822A3005EAAF5 /* URL.swift */,
 				FF2DFF282900280A00CA6544 /* StringExtension.swift */,
+				FFF8F80529018E5900A0D778 /* Protocols.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				FFB3D2A028F820DE005EAAF5 /* RoutesViewController.swift in Sources */,
 				FFB3D2E828FD8457005EAAF5 /* FlightOffersViewModel.swift in Sources */,
 				FFB3D2A628F820DE005EAAF5 /* Stopoint.xcdatamodeld in Sources */,
+				FFF8F80629018E5900A0D778 /* Protocols.swift in Sources */,
 				FF2DFF32290055A900CA6544 /* FormViewController.swift in Sources */,
 				FFF8F80129007BE400A0D778 /* RouteViewComponent.swift in Sources */,
 				FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */,

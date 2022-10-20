@@ -187,7 +187,7 @@ class FormViewController: UIViewController {
     }
 }
 
-extension FormViewController: FormViewModelDelegate {
+extension FormViewController: RoutesDelegate {
     // Função que recebe os dados vindos da viewModel
     func updateRoute(destiny: String) {
         routeView.originLabel.text = "Fortaleza"

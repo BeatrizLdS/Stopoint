@@ -7,19 +7,25 @@
 
 import Foundation
 
-protocol FlightOffersDelegate {
-    func updateData()
-}
-
 class FlightOffersViewModel {
 
     var flight: Flight?
     var offers: Offers?
-    var delegate: FlightOffersDelegate?
+    var delegate: DataDelegate?
 
     init(flight: Flight? = nil, offers: Offers? = nil) {
         self.flight = flight
         self.offers = offers
+    }
+
+    // Variável que determina o número de linhas que vai ter na table
+    var numberOfRows: Int? {
+        return (self.offers?.offers?.count)
+    }
+
+    // Retorna o pacote de viagem que possui um determinado index
+    func loadCurrentRoute(indexPath: IndexPath) -> TravelPackage {
+        return (self.offers?.offers?[indexPath.row])!
     }
 
     // Função que pesquisa ofertas de voos mais baratas
