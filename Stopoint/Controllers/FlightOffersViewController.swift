@@ -16,8 +16,8 @@ class FlightOffersViewController: UIViewController {
         table.separatorStyle = .none
         table.backgroundColor = .systemBackground
         // registra célula
-//        table.register(OfferTableViewCell.self, forCellReuseIdentifier: OfferTableViewCell.identifier)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(OfferTableViewCell.self, forCellReuseIdentifier: OfferTableViewCell.identifier)
+//        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
 
@@ -33,6 +33,7 @@ class FlightOffersViewController: UIViewController {
         print(viewModel?.flight)
         flightOffersTableView.delegate = self
         flightOffersTableView.dataSource = self
+        viewModel?.delegate = self
         viewModel!.searchFlighOffers()
     }
 
@@ -49,14 +50,15 @@ class FlightOffersViewController: UIViewController {
 // Protocólo responsável por determinar as células e seus dados
 extension FlightOffersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel?.numberOfRows ?? 1
+        self.viewModel?.numberOfRows ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? UITableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: OfferTableViewCell.identifier, for: indexPath) as? OfferTableViewCell else {
             return UITableViewCell()
         }
-        cell.backgroundColor = .blue
+        let currentPackage = viewModel?.loadCurrentRoute(indexPath: indexPath)
+        cell.offerComponent.priceLabel.text = currentPackage?.price.total
         return cell
     }
 
@@ -64,4 +66,12 @@ extension FlightOffersViewController: UITableViewDataSource {
 
 extension FlightOffersViewController: UITableViewDelegate {
 
+}
+
+extension FlightOffersViewController: DataDelegate {
+    func updateDatas() {
+        Task {
+            self.flightOffersTableView.reloadData()
+        }
+    }
 }
