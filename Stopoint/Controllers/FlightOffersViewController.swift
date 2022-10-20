@@ -24,6 +24,8 @@ class FlightOffersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Ofertas"
+        view.backgroundColor = .systemBackground
         view.addSubview(getDetailCodesButton)
         setConstraints()
 
