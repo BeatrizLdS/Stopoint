@@ -9,7 +9,7 @@ import UIKit
 
 class FlightOffersViewController: UIViewController {
 
-    var viewModel: FlightOffersViewModel = FlightOffersViewModel()
+    var viewModel: FlightOffersViewModel?
 
     var getDetailCodesButton: UIButton = {
         var button = UIButton()
@@ -20,7 +20,6 @@ class FlightOffersViewController: UIViewController {
     }()
 
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.searchFlighOffers()
     }
 
     override func viewDidLoad() {
@@ -29,6 +28,8 @@ class FlightOffersViewController: UIViewController {
         setConstraints()
 
         getDetailCodesButton.addTarget(self, action: #selector(self.getDetails), for: .touchUpInside)
+        print(viewModel?.flight)
+        viewModel!.searchFlighOffers()
     }
 
     func setConstraints() {
@@ -40,6 +41,6 @@ class FlightOffersViewController: UIViewController {
     }
 
     @objc func getDetails() {
-        viewModel.getCityDetails()
+        viewModel!.getCityDetails()
     }
 }

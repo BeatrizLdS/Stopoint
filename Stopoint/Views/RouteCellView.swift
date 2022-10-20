@@ -11,37 +11,10 @@ class RouteTableViewCell: UITableViewCell {
 
     static let identifier = "cell"
 
-    public var originLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .right
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    public var destinyLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private var airplaneImage: UIImageView = {
-        let image = UIImageView(image: UIImage(systemName: "airplane"))
-        image.tintColor = .systemCyan
-        image.contentMode = .scaleAspectFit
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-
-    private var containerStackView: UIStackView = {
-        var stack = UIStackView()
-        stack.axis = .horizontal
-        stack.backgroundColor = .clear
-        stack.layer.cornerRadius = 10
-        stack.spacing = 10
-        stack.layer.borderWidth = 1
-        stack.layer.borderColor = UIColor.systemCyan.cgColor
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
+    var routeComponent: RouteViewComponent = {
+        let routeView = RouteViewComponent()
+        routeView.translatesAutoresizingMaskIntoConstraints = false
+        return routeView
     }()
 
     override func awakeFromNib() {
@@ -55,16 +28,16 @@ class RouteTableViewCell: UITableViewCell {
             selectedBackgroundView?.backgroundColor = .clear
             // Todas essas animações rodam em paralelo
             UIView.animate(withDuration: 0.5) {
-                self.containerStackView.transform = CGAffineTransform(scaleX: 1.03, y: 1.03)
-                self.containerStackView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.routeComponent.containerStackView.transform = CGAffineTransform(scaleX: 1.03, y: 1.03)
+                self.routeComponent.containerStackView.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
             UIView.animate(withDuration: 0.5) {
-                self.containerStackView.layer.borderWidth = 4
-                self.containerStackView.layer.borderWidth = 1
+                self.routeComponent.containerStackView.layer.borderWidth = 4
+                self.routeComponent.containerStackView.layer.borderWidth = 1
             }
             UIView.animate(withDuration: 0.5) {
-                self.airplaneImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-                self.airplaneImage.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                self.routeComponent.airplaneImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.routeComponent.airplaneImage.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             }
             isSelected = false
         }
@@ -74,10 +47,7 @@ class RouteTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
-        self.contentView.addSubview(containerStackView)
-        self.containerStackView.addArrangedSubview(originLabel)
-        self.containerStackView.addArrangedSubview(airplaneImage)
-        self.containerStackView.addArrangedSubview(destinyLabel)
+        self.contentView.addSubview(routeComponent)
         setConstraints()
         self.selectionStyle = .none
     }
@@ -92,16 +62,12 @@ class RouteTableViewCell: UITableViewCell {
 
     private func setConstraints() {
         let containerStackViewConstraints = [
-            containerStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            containerStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            containerStackView.heightAnchor.constraint(equalToConstant: 50),
-            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            routeComponent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            routeComponent.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            routeComponent.heightAnchor.constraint(equalToConstant: 50),
+            routeComponent.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            routeComponent.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ]
-        let airplaneImageConstraints = [
-            airplaneImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-        ]
-        NSLayoutConstraint.activate(airplaneImageConstraints)
         NSLayoutConstraint.activate(containerStackViewConstraints)
     }
 }

@@ -31,7 +31,7 @@ class RoutesViewModel {
 
     // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
     func getAirportRoutes() {
-        Token.verifyToken()
+        Token.generateAccessToken()
 
         API().getRoutes(completion: { result in
             switch result {
@@ -41,10 +41,10 @@ class RoutesViewModel {
                     self.routes = try JSONDecoder().decode(Routes.self, from: data)
                     self.viewModelDelegate?.fetchDatas()
                 } catch {
-                    print(error)
+                    print(error.localizedDescription)
                 }
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         })
     }
