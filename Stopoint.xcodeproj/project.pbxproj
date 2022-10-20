@@ -33,6 +33,7 @@
 		FFB3D2F028FDC9E3005EAAF5 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2EF28FDC9E3005EAAF5 /* Token.swift */; };
 		FFB3D2F428FEE7B5005EAAF5 /* RouteCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */; };
 		FFF8F80129007BE400A0D778 /* RouteViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */; };
+		FFF8F8032901721700A0D778 /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F8022901721700A0D778 /* Warning.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		FFB3D2EF28FDC9E3005EAAF5 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCellView.swift; sourceTree = "<group>"; };
 		FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewComponent.swift; sourceTree = "<group>"; };
+		FFF8F8022901721700A0D778 /* Warning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				FFB3D2E528F9A9BA005EAAF5 /* Locations.swift */,
 				FFB3D2E928FD84FC005EAAF5 /* Flight.swift */,
 				FFB3D2ED28FD93F4005EAAF5 /* Offers.swift */,
+				FFF8F8022901721700A0D778 /* Warning.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */,
 				FFB3D2EC28FD859E005EAAF5 /* FlightOffersViewController.swift in Sources */,
 				FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */,
+				FFF8F8032901721700A0D778 /* Warning.swift in Sources */,
 				FFB3D2F028FDC9E3005EAAF5 /* Token.swift in Sources */,
 				FFB3D2D628F82294005EAAF5 /* API.swift in Sources */,
 				FF2DFF292900280A00CA6544 /* StringExtension.swift in Sources */,

@@ -65,6 +65,7 @@ class API {
         let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
 
             guard let data = data, error == nil else {
+                print(error)
                 completion(.failure(error!))
                 return
             }

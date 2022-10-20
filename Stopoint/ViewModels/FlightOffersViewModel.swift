@@ -7,10 +7,15 @@
 
 import Foundation
 
+protocol FlightOffersDelegate {
+    func updateData()
+}
+
 class FlightOffersViewModel {
 
     var flight: Flight?
     var offers: Offers?
+    var delegate: FlightOffersDelegate?
 
     init(flight: Flight? = nil, offers: Offers? = nil) {
         self.flight = flight
@@ -25,6 +30,7 @@ class FlightOffersViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.offers = try JSONDecoder().decode(Offers.self, from: data)
+                    print(self.offers)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -36,7 +42,7 @@ class FlightOffersViewModel {
 
     // Função que pega o nome da cidade e localização de cada cidade
     func getCityDetails() {
-        var list = offers!.dictionaries!.locations
+        let list = offers!.dictionaries!.locations
         for (file) in (list) {
             API().getCityByKeyword(city: file.value) { result in
                 switch result {

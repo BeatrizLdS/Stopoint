@@ -11,14 +11,16 @@ struct Flight {
     var originLocation: String
     var destinationLocation: String
     var departureDate: String
-    var adults: Int
-    var childrens: Int
+    var adults: String
+    var childrens: String
 
-    init(originLocation: String, destinationLocation: String, departureDate: String, adults: Int = 1, childrens: Int = 0) {
-        self.originLocation = originLocation
-        self.destinationLocation = destinationLocation
+    init(route: [String?], departureDate: String, adults: String, childrens: String) {
+        let adultsNumber = adults == "" ? "0" : adults
+        let childrensNumber = childrens == "" ? "0" : childrens
+        self.originLocation = route[0]!
+        self.destinationLocation = route[1]!
         self.departureDate = departureDate
-        self.adults = adults
-        self.childrens = childrens
+        self.adults = adultsNumber
+        self.childrens = childrensNumber
     }
 }

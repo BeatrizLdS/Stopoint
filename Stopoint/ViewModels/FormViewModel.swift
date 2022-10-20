@@ -7,11 +7,21 @@
 
 import Foundation
 
+protocol FormViewModelDelegate {
+    func updateRoute(destiny: String)
+}
+
 class FormViewModel {
 
-    var location: Location
+    var location: Location?
 
-    init(location: Location) {
+    var delegate: FormViewModelDelegate?
+
+    init(location: Location? = nil) {
         self.location = location
+    }
+
+    public func fetchData() {
+        delegate?.updateRoute(destiny: (location?.name)!)
     }
 }
