@@ -76,7 +76,7 @@ class FormViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Configurar Viagem"
+        title = "Configuração"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pesquisar",
                                                             style: .done, target: self,
                                                             action: #selector(searchFlights))
