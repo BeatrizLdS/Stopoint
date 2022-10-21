@@ -20,7 +20,7 @@ class OfferTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
-        self.contentView.backgroundColor = .systemFill
+        self.contentView.backgroundColor = .clear
         self.contentView.addSubview(offerComponent)
         setConstraints()
         self.selectionStyle = .none
@@ -41,9 +41,8 @@ class OfferTableViewCell: UITableViewCell {
 
     private func setConstraints() {
         let offerComponentConstraints = [
-            offerComponent.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            offerComponent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            offerComponent.heightAnchor.constraint(equalToConstant: 50),
+            offerComponent.topAnchor.constraint(equalTo: contentView.topAnchor),
+            offerComponent.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             offerComponent.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             offerComponent.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ]

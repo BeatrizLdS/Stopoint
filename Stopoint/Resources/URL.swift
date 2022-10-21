@@ -50,7 +50,7 @@ struct Url {
         let destination = "&destinationLocationCode=\(flight.destinationLocation)"
         let date = "&departureDate=\(flight.departureDate)"
         let persons = "&adults=\(flight.adults)&children=\(flight.childrens)"
-        let othersInformetions = "&nonStop=false&currencyCode=BRL&max=5"
+        let othersInformetions = "&nonStop=false&currencyCode=BRL&max=3"
         urlComponents.query = "\(origin)\(destination)\(date)\(persons)\(othersInformetions)"
         print(urlComponents.url!)
         return urlComponents.url!

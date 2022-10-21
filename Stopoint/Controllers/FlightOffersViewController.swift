@@ -26,11 +26,10 @@ class FlightOffersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Ofertas"
+        title = "Pacote"
         view.backgroundColor = .systemBackground
         view.addSubview(flightOffersTableView)
 
-        print(viewModel?.flight)
         flightOffersTableView.delegate = self
         flightOffersTableView.dataSource = self
         viewModel?.delegate = self
@@ -49,16 +48,24 @@ class FlightOffersViewController: UIViewController {
 
 // Protocólo responsável por determinar as células e seus dados
 extension FlightOffersViewController: UITableViewDataSource {
+
+    // Função que define a altura de cada linha
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (viewModel?.getRowHeight(indexPath: indexPath))!
+    }
+
+    // Função que define o número de linhas de cada seção da table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.viewModel?.numberOfRows ?? 0
     }
 
+    // Função que define cada célula da API e seu conteúdo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: OfferTableViewCell.identifier, for: indexPath) as? OfferTableViewCell else {
             return UITableViewCell()
         }
         let currentPackage = viewModel?.loadCurrentRoute(indexPath: indexPath)
-        cell.offerComponent.priceLabel.text = currentPackage?.price.total
+        cell.offerComponent.inserctTravelers(travellerPrincingList: currentPackage!.travelerPricings)
         return cell
     }
 

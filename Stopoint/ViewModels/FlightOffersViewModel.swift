@@ -23,8 +23,16 @@ class FlightOffersViewModel {
         return (self.offers?.offers?.count)
     }
 
+    // Função que retorna a altura da célula
+    func getRowHeight(indexPath: IndexPath) -> CGFloat {
+        let countTraveler = offers?.offers?[indexPath.row].travelerPricings.count
+        let heigh = CGFloat(30 * countTraveler!) + 30
+        return heigh
+    }
+
     // Retorna o pacote de viagem que possui um determinado index
     func loadCurrentRoute(indexPath: IndexPath) -> TravelPackage {
+        self.offers?.offers?[indexPath.row].travelerPricings
         return (self.offers?.offers?[indexPath.row])!
     }
 
@@ -34,7 +42,8 @@ class FlightOffersViewModel {
             switch result {
             case .success(let data):
                 do {
-                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    let serialization = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    print(serialization)
                     self.offers = try JSONDecoder().decode(Offers.self, from: data)
                     print(self.offers)
                     self.delegate?.updateDatas()
