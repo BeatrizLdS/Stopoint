@@ -63,7 +63,7 @@ struct Url {
         urlComponents.path = "/v1/reference-data/locations/cities"
         let country = "countryCode=\(city.countryCode)"
         let keyword = "&keyword=\(city.cityCode)"
-        urlComponents.query = "\(country)\(keyword)&max=30"
+        urlComponents.query = "\(country)\(keyword)"
         return urlComponents.url!
     }
 }

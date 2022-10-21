@@ -11,6 +11,7 @@ class FlightOffersViewModel {
 
     var flight: Flight?
     var offers: Offers?
+    var citysList: [Location] = []
     var delegate: DataDelegate?
 
     init(flight: Flight? = nil, offers: Offers? = nil) {
@@ -26,26 +27,32 @@ class FlightOffersViewModel {
     // Função que retorna a altura da célula
     func getRowHeight(indexPath: IndexPath) -> CGFloat {
         let countTraveler = offers?.offers?[indexPath.row].travelerPricings.count
-        let heigh = CGFloat(30 * countTraveler!) + 30
+        let countRoutes = offers?.offers?[indexPath.row].itineraries[0].segments?.count
+        var heigh = CGFloat(25 * countTraveler!) + 10 // 6 pelo espaço das linhas
+        heigh += CGFloat(30 * countRoutes!) + 10 // Pelas linhas de rota
+        heigh += 20 // 20 pela linha com o valor total
+        heigh += 30 // 30 pela label de valores
         return heigh
     }
 
     // Retorna o pacote de viagem que possui um determinado index
     func loadCurrentRoute(indexPath: IndexPath) -> TravelPackage {
-        self.offers?.offers?[indexPath.row].travelerPricings
         return (self.offers?.offers?[indexPath.row])!
     }
 
+    // Função que gera os dados para a controller
+    public func generateDatas() {
+        searchFlighOffers()
+    }
+
     // Função que pesquisa ofertas de voos mais baratas
-    func searchFlighOffers() {
+    private func searchFlighOffers() {
         API().getFlightOffers(flight: self.flight!, completion: {result in
             switch result {
             case .success(let data):
                 do {
-                    let serialization = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    print(serialization)
+                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.offers = try JSONDecoder().decode(Offers.self, from: data)
-                    print(self.offers)
                     self.delegate?.updateDatas()
                 } catch {
                     print(error.localizedDescription)
@@ -57,7 +64,7 @@ class FlightOffersViewModel {
     }
 
     // Função que pega o nome da cidade e localização de cada cidade
-    func getCityDetails() {
+    private func getCityDetails() {
         let list = offers!.dictionaries!.locations
         for (file) in (list) {
             API().getCityByKeyword(city: file.value) { result in
@@ -67,6 +74,9 @@ class FlightOffersViewModel {
                         _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                         let options = try JSONDecoder().decode(Routes.self, from: data)
                         let officialCity = options.routes?.first(where: {$0.iataCode == file.value.cityCode})
+                        if officialCity != nil {
+                            self.citysList.append(officialCity!)
+                        }
                     } catch {
                         print(error.localizedDescription)
                     }

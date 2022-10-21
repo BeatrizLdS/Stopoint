@@ -42,7 +42,7 @@ class OfferTableViewCell: UITableViewCell {
     private func setConstraints() {
         let offerComponentConstraints = [
             offerComponent.topAnchor.constraint(equalTo: contentView.topAnchor),
-            offerComponent.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            offerComponent.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             offerComponent.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             offerComponent.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ]

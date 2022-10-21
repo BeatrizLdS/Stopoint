@@ -18,6 +18,7 @@ class RouteViewComponent: UIView {
 
     var destinyLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -35,7 +36,7 @@ class RouteViewComponent: UIView {
         stack.axis = .horizontal
         stack.backgroundColor = .clear
         stack.layer.cornerRadius = 10
-        stack.spacing = 10
+        stack.distribution = .fillEqually
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor.systemCyan.cgColor
         stack.translatesAutoresizingMaskIntoConstraints = false

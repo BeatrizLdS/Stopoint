@@ -17,7 +17,6 @@ class FlightOffersViewController: UIViewController {
         table.backgroundColor = .systemBackground
         // registra célula
         table.register(OfferTableViewCell.self, forCellReuseIdentifier: OfferTableViewCell.identifier)
-//        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
 
@@ -33,16 +32,12 @@ class FlightOffersViewController: UIViewController {
         flightOffersTableView.delegate = self
         flightOffersTableView.dataSource = self
         viewModel?.delegate = self
-        viewModel!.searchFlighOffers()
+        viewModel!.generateDatas()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         flightOffersTableView.frame = view.bounds
-    }
-
-    @objc func getDetails() {
-        viewModel!.getCityDetails()
     }
 }
 
@@ -66,6 +61,9 @@ extension FlightOffersViewController: UITableViewDataSource {
         }
         let currentPackage = viewModel?.loadCurrentRoute(indexPath: indexPath)
         cell.offerComponent.inserctTravelers(travellerPrincingList: currentPackage!.travelerPricings)
+        cell.offerComponent.generateTotalView(price: currentPackage!.price)
+        cell.offerComponent.generateRouteStackView(itineraries: currentPackage!.itineraries[0],
+                                                   locations: viewModel!.citysList)
         return cell
     }
 
