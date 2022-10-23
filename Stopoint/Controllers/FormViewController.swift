@@ -13,7 +13,9 @@ class FormViewController: UIViewController {
 
     var routeView: RouteViewComponent = {
         var routeView = RouteViewComponent()
-        routeView.containerStackView.layer.borderColor = UIColor.systemGray.cgColor
+        routeView.layer.cornerRadius = 10
+        routeView.layer.borderWidth = 1
+        routeView.layer.borderColor = UIColor.systemGray.cgColor
         routeView.translatesAutoresizingMaskIntoConstraints = false
         return routeView
     }()
@@ -76,7 +78,7 @@ class FormViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Configurar Viagem"
+        title = "Configuração"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pesquisar",
                                                             style: .done, target: self,
                                                             action: #selector(searchFlights))
@@ -187,7 +189,7 @@ class FormViewController: UIViewController {
     }
 }
 
-extension FormViewController: FormViewModelDelegate {
+extension FormViewController: RoutesDelegate {
     // Função que recebe os dados vindos da viewModel
     func updateRoute(destiny: String) {
         routeView.originLabel.text = "Fortaleza"

@@ -12,12 +12,15 @@ class RouteViewComponent: UIView {
     var originLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .right
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     var destinyLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .left
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -35,9 +38,7 @@ class RouteViewComponent: UIView {
         stack.axis = .horizontal
         stack.backgroundColor = .clear
         stack.layer.cornerRadius = 10
-        stack.spacing = 10
-        stack.layer.borderWidth = 1
-        stack.layer.borderColor = UIColor.systemCyan.cgColor
+        stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -60,8 +61,8 @@ class RouteViewComponent: UIView {
         let containerStackConstraints = [
             containerStackView.topAnchor.constraint(equalTo: self.topAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ]
         let airplaneImageConstraints = [
             airplaneImage.centerXAnchor.constraint(equalTo: self.centerXAnchor)

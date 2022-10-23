@@ -40,7 +40,7 @@ class RoutesViewController: UIViewController {
         view.addSubview(avaliableRoutesTable)
         avaliableRoutesTable.delegate = self
         avaliableRoutesTable.dataSource = self
-        viewModel?.viewModelDelegate = self
+        viewModel?.delegate = self
         viewModel!.getAirportRoutes()
     }
 
@@ -97,8 +97,8 @@ extension RoutesViewController: UITableViewDelegate {
 
 }
 
-extension RoutesViewController: ViewModelDelegate {
-    func fetchDatas() {
+extension RoutesViewController: DataDelegate {
+    func updateDatas() {
         Task {
             self.avaliableRoutesTable.reloadData()
         }
