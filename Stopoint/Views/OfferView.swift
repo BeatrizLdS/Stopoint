@@ -71,7 +71,7 @@ class OfferView: UIView {
         self.addSubview(pricesStackView)
         self.addSubview(bottomLineView)
         self.addSubview(totalStackView)
-        self.layer.borderWidth = 2
+        self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.systemGray.cgColor
         self.layer.cornerRadius = 10
         setConstraints()
