@@ -188,8 +188,8 @@
 		FFB3D2CF28F8210B005EAAF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */,
 				FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */,
+				FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */,
 				FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */,
 				FFF8F80B2901942700A0D778 /* OfferView.swift */,
 			);

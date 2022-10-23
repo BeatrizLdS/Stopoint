@@ -53,6 +53,7 @@ class FlightOffersViewModel {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.offers = try JSONDecoder().decode(Offers.self, from: data)
+                    print(self.offers)
                     self.delegate?.updateDatas()
                 } catch {
                     print(error.localizedDescription)

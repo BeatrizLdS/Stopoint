@@ -13,7 +13,9 @@ class FormViewController: UIViewController {
 
     var routeView: RouteViewComponent = {
         var routeView = RouteViewComponent()
-        routeView.containerStackView.layer.borderColor = UIColor.systemGray.cgColor
+        routeView.layer.cornerRadius = 10
+        routeView.layer.borderWidth = 1
+        routeView.layer.borderColor = UIColor.systemGray.cgColor
         routeView.translatesAutoresizingMaskIntoConstraints = false
         return routeView
     }()

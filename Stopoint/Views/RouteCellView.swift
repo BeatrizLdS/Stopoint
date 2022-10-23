@@ -13,6 +13,9 @@ class RouteTableViewCell: UITableViewCell {
 
     var routeComponent: RouteViewComponent = {
         let routeView = RouteViewComponent()
+        routeView.layer.cornerRadius = 10
+        routeView.layer.borderWidth = 1
+        routeView.layer.borderColor = UIColor.systemCyan.cgColor
         routeView.translatesAutoresizingMaskIntoConstraints = false
         return routeView
     }()
@@ -28,16 +31,16 @@ class RouteTableViewCell: UITableViewCell {
             selectedBackgroundView?.backgroundColor = .clear
             // Todas essas animações rodam em paralelo
             UIView.animate(withDuration: 0.5) {
-                self.routeComponent.containerStackView.transform = CGAffineTransform(scaleX: 1.03, y: 1.03)
-                self.routeComponent.containerStackView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.routeComponent.transform = CGAffineTransform(scaleX: 1.03, y: 1.03)
+                self.routeComponent.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
             UIView.animate(withDuration: 0.5) {
-                self.routeComponent.containerStackView.layer.borderWidth = 4
-                self.routeComponent.containerStackView.layer.borderWidth = 1
+                self.routeComponent.layer.borderWidth = 4
+                self.routeComponent.layer.borderWidth = 1
             }
             UIView.animate(withDuration: 0.5) {
-                self.routeComponent.airplaneImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                 self.routeComponent.airplaneImage.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                self.routeComponent.airplaneImage.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
             isSelected = false
         }
