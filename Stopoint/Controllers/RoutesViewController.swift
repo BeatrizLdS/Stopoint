@@ -61,9 +61,7 @@ extension RoutesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
             let location = (self.viewModel?.loadCurrentRoute(indexPath: indexPath))
-            let formVM = FormViewModel(location: location)
-            let nextController = FormViewController()
-            nextController.viewModel = formVM
+            let nextController = FormViewController(location: location!)
             self.navigationController?.pushViewController(nextController, animated: true)
         })
     }
