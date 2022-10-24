@@ -59,6 +59,8 @@ extension RoutesViewController: UITableViewDataSource {
 
     // Função que define a ação da seleção de uma linha
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let haptics = UISelectionFeedbackGenerator()
+        haptics.selectionChanged()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
             let location = (self.viewModel?.loadCurrentRoute(indexPath: indexPath))
             let nextController = FormViewController(location: location!)
@@ -75,6 +77,7 @@ extension RoutesViewController: DataDelegate {
     func updateDatas() {
         Task {
             self.routesView.avaliableRoutesTable.reloadData()
+            self.routesView.progressView.stopAnimating()
             self.routesView.progressView.isHidden = true
             self.routesView.avaliableRoutesTable.isHidden = false
         }
