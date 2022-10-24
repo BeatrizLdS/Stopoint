@@ -9,37 +9,43 @@ import Foundation
 
 class Token {
 
-    static var account: Account = Account(clientId: "", token: "", expireTokenTime: 0)
+    var error: Error?
+    var account: Account = Account(clientId: "", token: "", expireTokenTime: 0)
+    private let tokenService: TokenServiceProtocol
+
+    init(tokenService: TokenServiceProtocol = API()) {
+        self.tokenService = tokenService
+    }
 
     // Gera um token de aceso para a API e manda para a Controller
-    static func generateAccessToken() {
-        API().generateToken(completion: { result in
-            print(result)
+    func generateAccessToken() {
+        tokenService.generateToken(completion: { result in
             switch result {
             case .success(let data):
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    account = try JSONDecoder().decode(Account.self, from: data)
-                    print("Deu bom gerar o toke!\n TOKEN: \(account.token)")
-                    let token = Data(account.token.utf8)
+                    self.account = try JSONDecoder().decode(Account.self, from: data)
+                    let token = Data(self.account.token.utf8)
                     KeychainHelper.standard.save(data: token, service: "access-token", account: "amadeus")
                 } catch {
+                    self.error = error
                     print(error.localizedDescription)
                 }
             case .failure(let error):
+                self.error = error
                 print(error.localizedDescription)
             }
         })
     }
 
     // Atualiza o account
-    static func updateTokenInformation() {
-        API().getTokenInformation(completion: { result in
+    func updateTokenInformation() {
+        tokenService.getTokenInformation(completion: { result in
             switch result {
             case .success(let data):
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    account = try JSONDecoder().decode(Account.self, from: data)
+                    self.account = try JSONDecoder().decode(Account.self, from: data)
                 } catch {
                     print(error)
                 }
@@ -50,9 +56,9 @@ class Token {
     }
 
     // Função que verifica o token e atualiza caso necessário
-    static func verifyToken() {
+    func verifyToken() {
         self.updateTokenInformation()
-        if account.expireTokenTime < 10 {
+        if self.account.expireTokenTime < 10 {
             self.generateAccessToken()
         }
     }
