@@ -75,6 +75,8 @@ extension RoutesViewController: DataDelegate {
     func updateDatas() {
         Task {
             self.routesView.avaliableRoutesTable.reloadData()
+            self.routesView.progressView.isHidden = true
+            self.routesView.avaliableRoutesTable.isHidden = false
         }
     }
 }

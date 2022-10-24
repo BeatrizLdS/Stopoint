@@ -9,6 +9,15 @@ import UIKit
 
 class RoutesView: UIView {
 
+    lazy var progressView: UIActivityIndicatorView = {
+        let progressView = UIActivityIndicatorView(style: .medium)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.startAnimating()
+        progressView.isHidden = false
+
+        return progressView
+    }()
+
     lazy var avaliableRoutesTable: UITableView = {
         let table = UITableView()
         table.separatorStyle = .none
@@ -16,6 +25,7 @@ class RoutesView: UIView {
         // registra célula
         table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.isHidden = true
         return table
     }()
 
@@ -23,6 +33,7 @@ class RoutesView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .systemBackground
         addSubview(avaliableRoutesTable)
+        addSubview(progressView)
         setConstraints()
     }
 
@@ -37,7 +48,12 @@ class RoutesView: UIView {
             avaliableRoutesTable.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             avaliableRoutesTable.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ]
+        let progressViewConstraints = [
+            progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            progressView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ]
         NSLayoutConstraint.activate(avaliableRoutesTableConstraints)
+        NSLayoutConstraint.activate(progressViewConstraints)
     }
 
 }
