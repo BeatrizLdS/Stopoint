@@ -104,7 +104,7 @@ class FormViewController: UIViewController {
 
     @objc func searchFlights() {
         view.endEditing(true)
-        if (childrensNumberTextField.text == "" && adultsNumberTextField.text == "") {
+        if childrensNumberTextField.text == "" && adultsNumberTextField.text == "" {
             let warning = Warning(title: "Nenhuma passageiro!",
                                   message: "Adicione pelo menos uma pessoa para buscar a viagem!")
             generatAlert(warning: warning)
@@ -114,7 +114,7 @@ class FormViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let nowDate = dateFormatter.string(from: Date.now)
         let datePickerFormatted = dateFormatter.string(from: datePickerView.date)
-        if (nowDate != datePickerFormatted && datePickerView.date < Date.now) {
+        if nowDate != datePickerFormatted && datePickerView.date < Date.now {
             let warning = Warning(title: "Data inválida!",
                                   message: "Insira uma data no presente ou no futuro!")
             generatAlert(warning: warning)

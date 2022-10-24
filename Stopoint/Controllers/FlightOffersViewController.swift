@@ -25,7 +25,7 @@ class FlightOffersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Pacote"
+        title = "Ofertas"
         view.backgroundColor = .systemBackground
         view.addSubview(flightOffersTableView)
 

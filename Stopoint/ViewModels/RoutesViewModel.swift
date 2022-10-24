@@ -12,6 +12,9 @@ class RoutesViewModel {
     var delegate: DataDelegate?
     private var routes: Routes
 
+    private let api = API()
+    private let tokenManager = Token()
+
     init(routes: Routes) {
         self.routes = routes
         self.routes.routes = []
@@ -29,9 +32,9 @@ class RoutesViewModel {
 
     // Função responsável por capturar rotas do aeroporto partindo de Fortaleza
     func getAirportRoutes() {
-        Token.generateAccessToken()
+        tokenManager.generateAccessToken()
 
-        API().getRoutes(completion: { result in
+        api.getRoutes(completion: { result in
             switch result {
             case .success(let data):
                 do {
