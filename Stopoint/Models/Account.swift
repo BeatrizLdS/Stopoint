@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct Authorization: Decodable{
+struct Account: Decodable {
     var clientId: String
     var token: String
+    var expireTokenTime: Int
 
-    enum CodingKeys: String, CodingKey{
+    enum CodingKeys: String, CodingKey {
         case clientId = "client_id"
         case token = "access_token"
+        case expireTokenTime = "expires_in"
     }
 }
