@@ -18,7 +18,7 @@ class Token {
     }
 
     // Gera um token de aceso para a API e manda para a Controller
-    func generateAccessToken() {
+    func generateAccessToken(completion: @escaping () -> Void) {
         tokenService.generateToken(completion: { result in
             switch result {
             case .success(let data):
@@ -27,6 +27,7 @@ class Token {
                     self.account = try JSONDecoder().decode(Account.self, from: data)
                     let token = Data(self.account.token.utf8)
                     KeychainHelper.standard.save(data: token, service: "access-token", account: "amadeus")
+                    completion()
                 } catch {
                     self.error = error
                     print(error.localizedDescription)
@@ -59,7 +60,7 @@ class Token {
     func verifyToken() {
         self.updateTokenInformation()
         if self.account.expireTokenTime < 10 {
-            self.generateAccessToken()
+            self.generateAccessToken(completion: {})
         }
     }
 }
