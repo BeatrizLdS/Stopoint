@@ -31,14 +31,15 @@
 		FFB3D2EC28FD859E005EAAF5 /* FlightOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2EB28FD859E005EAAF5 /* FlightOffersViewController.swift */; };
 		FFB3D2EE28FD93F4005EAAF5 /* Offers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2ED28FD93F4005EAAF5 /* Offers.swift */; };
 		FFB3D2F028FDC9E3005EAAF5 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2EF28FDC9E3005EAAF5 /* Token.swift */; };
-		FFB3D2F428FEE7B5005EAAF5 /* RouteCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */; };
-		FFF8F80129007BE400A0D778 /* RouteViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */; };
+		FFB3D2F428FEE7B5005EAAF5 /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2F328FEE7B5005EAAF5 /* RouteTableViewCell.swift */; };
+		FFF8F80129007BE400A0D778 /* RouteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80029007BE400A0D778 /* RouteComponent.swift */; };
 		FFF8F8032901721700A0D778 /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F8022901721700A0D778 /* Warning.swift */; };
 		FFF8F80629018E5900A0D778 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80529018E5900A0D778 /* Protocols.swift */; };
 		FFF8F80A290193BB00A0D778 /* OfferTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */; };
 		FFF8F80C2901942700A0D778 /* OfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80B2901942700A0D778 /* OfferView.swift */; };
 		FFF8F81029062FF800A0D778 /* TokenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80F29062FF800A0D778 /* TokenSpec.swift */; };
 		FFF8F81229063D0100A0D778 /* MockTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F81129063D0100A0D778 /* MockTokenService.swift */; };
+		FFF8F8192906E29300A0D778 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F8182906E29300A0D778 /* RoutesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,14 +88,15 @@
 		FFB3D2EB28FD859E005EAAF5 /* FlightOffersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightOffersViewController.swift; sourceTree = "<group>"; };
 		FFB3D2ED28FD93F4005EAAF5 /* Offers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offers.swift; sourceTree = "<group>"; };
 		FFB3D2EF28FDC9E3005EAAF5 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCellView.swift; sourceTree = "<group>"; };
-		FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewComponent.swift; sourceTree = "<group>"; };
+		FFB3D2F328FEE7B5005EAAF5 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
+		FFF8F80029007BE400A0D778 /* RouteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteComponent.swift; sourceTree = "<group>"; };
 		FFF8F8022901721700A0D778 /* Warning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
 		FFF8F80529018E5900A0D778 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferTableViewCell.swift; sourceTree = "<group>"; };
 		FFF8F80B2901942700A0D778 /* OfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferView.swift; sourceTree = "<group>"; };
 		FFF8F80F29062FF800A0D778 /* TokenSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSpec.swift; sourceTree = "<group>"; };
 		FFF8F81129063D0100A0D778 /* MockTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTokenService.swift; sourceTree = "<group>"; };
+		FFF8F8182906E29300A0D778 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +196,7 @@
 		FFB3D2CF28F8210B005EAAF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FFF8F80029007BE400A0D778 /* RouteViewComponent.swift */,
-				FFB3D2F328FEE7B5005EAAF5 /* RouteCellView.swift */,
+				FFF8F8172906E24700A0D778 /* Routes */,
 				FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */,
 				FFF8F80B2901942700A0D778 /* OfferView.swift */,
 			);
@@ -242,6 +243,16 @@
 				FF2DFF31290055A900CA6544 /* FormViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FFF8F8172906E24700A0D778 /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				FFB3D2F328FEE7B5005EAAF5 /* RouteTableViewCell.swift */,
+				FFF8F80029007BE400A0D778 /* RouteComponent.swift */,
+				FFF8F8182906E29300A0D778 /* RoutesView.swift */,
+			);
+			path = Routes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,16 +413,17 @@
 				FFB3D2A628F820DE005EAAF5 /* Stopoint.xcdatamodeld in Sources */,
 				FFF8F80629018E5900A0D778 /* Protocols.swift in Sources */,
 				FF2DFF32290055A900CA6544 /* FormViewController.swift in Sources */,
-				FFF8F80129007BE400A0D778 /* RouteViewComponent.swift in Sources */,
+				FFF8F80129007BE400A0D778 /* RouteComponent.swift in Sources */,
 				FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */,
 				FFF8F80C2901942700A0D778 /* OfferView.swift in Sources */,
 				FFB3D2EC28FD859E005EAAF5 /* FlightOffersViewController.swift in Sources */,
 				FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */,
 				FFF8F8032901721700A0D778 /* Warning.swift in Sources */,
+				FFF8F8192906E29300A0D778 /* RoutesView.swift in Sources */,
 				FFB3D2F028FDC9E3005EAAF5 /* Token.swift in Sources */,
 				FFB3D2D628F82294005EAAF5 /* API.swift in Sources */,
 				FF2DFF292900280A00CA6544 /* StringExtension.swift in Sources */,
-				FFB3D2F428FEE7B5005EAAF5 /* RouteCellView.swift in Sources */,
+				FFB3D2F428FEE7B5005EAAF5 /* RouteTableViewCell.swift in Sources */,
 				FFF8F80A290193BB00A0D778 /* OfferTableViewCell.swift in Sources */,
 				FFB3D2E328F97816005EAAF5 /* Keychain.swift in Sources */,
 				FFB3D2EE28FD93F4005EAAF5 /* Offers.swift in Sources */,
