@@ -14,6 +14,8 @@ protocol TokenServiceProtocol {
 
 // Requisições relacionadas com as rotas (origem -> destino) / Origem = Fortaleza
 class API {
+    let clientId = "xA37zqxGxLT6uiYMzhI4K3CaCpo1quXV"
+    let clientSecret = "OmSjqbPHJYKvGRG7"
     // função responsável por pegar todas as rotas partindo de Fortaleza
     func getRoutes(completion: @escaping (Result<Data, Error>) -> Void) {
         let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
@@ -50,10 +52,12 @@ class API {
         let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
 
             guard let data = data, error == nil else {
+                print("Entrou aqui")
                 completion(.failure(error!))
                 return
             }
 
+            print("token foi gerado")
             completion(.success(data))
 
         })
@@ -65,10 +69,12 @@ extension API: TokenServiceProtocol {
     // função responsável por gerar um token de acesso na API
     func generateToken(completion: @escaping (Result<Data, Error>) -> Void) {
         let url = Url.urlGenerateAcessToken
-        let parameters = "client_id=WfGVetIoPk0AtwIvrRL5Aok1FYThwOmd&client_secret=kGJpPg4z6WMFmAAo&grant_type=client_credentials"
+        print(url)
+        let parameters = "grant_type=client_credentials&client_id=\(clientId)&client_secret=\(clientSecret)"
         let postData =  parameters.data(using: .utf8)
 
         var request = URLRequest(url: url)
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = postData
         executeRequest(urlRequest: request, completion: completion)
