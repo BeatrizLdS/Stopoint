@@ -22,33 +22,16 @@ class FlightOffersViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var flightOffersTableView: UITableView = {
-        let table = UITableView()
-        table.separatorStyle = .none
-        table.backgroundColor = .systemBackground
-        // registra célula
-        table.register(OfferTableViewCell.self, forCellReuseIdentifier: OfferTableViewCell.identifier)
-        return table
-    }()
-
-    override func viewWillAppear(_ animated: Bool) {
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ofertas"
         view.backgroundColor = .systemBackground
-        view.addSubview(flightOffersTableView)
+        view = offersView
 
-        flightOffersTableView.delegate = self
-        flightOffersTableView.dataSource = self
+        offersView?.flightOffersTableView.delegate = self
+        offersView?.flightOffersTableView.dataSource = self
         viewModel?.delegate = self
         viewModel!.generateDatas()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        flightOffersTableView.frame = view.bounds
     }
 }
 
@@ -87,7 +70,7 @@ extension FlightOffersViewController: UITableViewDelegate {
 extension FlightOffersViewController: DataDelegate {
     func updateDatas() {
         Task {
-            self.flightOffersTableView.reloadData()
+            self.offersView?.flightOffersTableView.reloadData()
         }
     }
 }
