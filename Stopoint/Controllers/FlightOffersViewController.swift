@@ -54,10 +54,7 @@ extension FlightOffersViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let currentPackage = viewModel?.loadCurrentRoute(indexPath: indexPath)
-        cell.offerComponent.inserctTravelers(travellerPrincingList: currentPackage!.travelerPricings)
-        cell.offerComponent.generateTotalView(price: currentPackage!.price)
-        cell.offerComponent.generateRouteStackView(itineraries: currentPackage!.itineraries[0],
-                                                   locations: viewModel!.citysList)
+        cell.configure(package: currentPackage!, locations: viewModel!.citysList)
         return cell
     }
 

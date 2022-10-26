@@ -39,6 +39,12 @@ class OfferTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func configure(package: TravelPackage, locations: [Location]) {
+        offerComponent.inserctTravelers(travellerPrincingList: package.travelerPricings)
+        offerComponent.generateTotalView(price: package.price)
+        offerComponent.generateRouteStackView(itineraries: package.itineraries[0], locations: locations)
+    }
+
     private func setConstraints() {
         let offerComponentConstraints = [
             offerComponent.topAnchor.constraint(equalTo: contentView.topAnchor),
