@@ -10,6 +10,17 @@ import UIKit
 class FlightOffersViewController: UIViewController {
 
     var viewModel: FlightOffersViewModel?
+    var offersView: OffersView?
+
+    init(flight: Flight) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = FlightOffersViewModel(flight: flight)
+        self.offersView = OffersView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     var flightOffersTableView: UITableView = {
         let table = UITableView()

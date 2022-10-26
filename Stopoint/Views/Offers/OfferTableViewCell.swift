@@ -11,8 +11,8 @@ class OfferTableViewCell: UITableViewCell {
 
     static let identifier = "cell"
 
-    var offerComponent: OfferView = {
-        var view = OfferView()
+    var offerComponent: OfferViewComponent = {
+        var view = OfferViewComponent()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

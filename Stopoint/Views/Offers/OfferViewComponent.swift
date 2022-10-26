@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OfferView: UIView {
+class OfferViewComponent: UIView {
 
     var routeStackView: UIStackView = {
         let stack = UIStackView()

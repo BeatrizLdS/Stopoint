@@ -63,9 +63,7 @@ class FormViewController: UIViewController {
                                           departureDate: datePickerFormatted,
                                           adults: (formView?.adultsNumberTextField.text!)!,
                                           childrens: (formView?.childrensNumberTextField.text!)!)
-        let nextViewModel = FlightOffersViewModel(flight: settedFlight)
-        let nextController = FlightOffersViewController()
-        nextController.viewModel = nextViewModel
+        let nextController = FlightOffersViewController(flight: settedFlight)
         navigationController?.pushViewController(nextController, animated: true)
     }
 
