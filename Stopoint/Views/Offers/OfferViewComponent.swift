@@ -132,16 +132,10 @@ class OfferViewComponent: UIView {
     public func generateRouteStackView(itineraries: Itinerarie, locations: [Location]) {
         itineraries.segments?.forEach { segment in
             let routeView = RouteViewComponent()
-            if let city = locations.first(where: {$0.iataCode == segment.departure.location}) {
-                routeView.originLabel.text = city.name?.capitalizeFirstLetter()
-            } else {
-                routeView.originLabel.text = segment.departure.location
-            }
-            if let city = locations.first(where: {$0.iataCode == segment.arrival.location}) {
-                routeView.destinyLabel.text = city.name?.capitalizeFirstLetter()
-            } else {
-                routeView.destinyLabel.text = segment.arrival.location
-            }
+            let cityNameDeparture = (locations.first(where: {$0.iataCode == segment.departure.location})?.name ?? segment.departure.location)
+            routeView.originLabel.text = cityNameDeparture.capitalizeFirstLetter()
+            let cityNameArrival = (locations.first(where: {$0.iataCode == segment.arrival.location})?.name ?? segment.arrival.location)
+            routeView.destinyLabel.text = cityNameArrival.capitalizeFirstLetter()
             routeView.originLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
             routeView.destinyLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
             routeView.translatesAutoresizingMaskIntoConstraints = false
