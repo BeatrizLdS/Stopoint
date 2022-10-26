@@ -13,10 +13,8 @@
 		FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */; };
 		FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29D28F820DE005EAAF5 /* SceneDelegate.swift */; };
 		FFB3D2A028F820DE005EAAF5 /* RoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29F28F820DE005EAAF5 /* RoutesViewController.swift */; };
-		FFB3D2A328F820DE005EAAF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFB3D2A128F820DE005EAAF5 /* Main.storyboard */; };
 		FFB3D2A628F820DE005EAAF5 /* Stopoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2A428F820DE005EAAF5 /* Stopoint.xcdatamodeld */; };
 		FFB3D2A828F820DF005EAAF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFB3D2A728F820DF005EAAF5 /* Assets.xcassets */; };
-		FFB3D2AB28F820DF005EAAF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFB3D2A928F820DF005EAAF5 /* LaunchScreen.storyboard */; };
 		FFB3D2B628F820DF005EAAF5 /* StopointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2B528F820DF005EAAF5 /* StopointTests.swift */; };
 		FFB3D2C028F820DF005EAAF5 /* StopointUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2BF28F820DF005EAAF5 /* StopointUITests.swift */; };
 		FFB3D2C228F820DF005EAAF5 /* StopointUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D2C128F820DF005EAAF5 /* StopointUITestsLaunchTests.swift */; };
@@ -67,10 +65,8 @@
 		FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFB3D29D28F820DE005EAAF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FFB3D29F28F820DE005EAAF5 /* RoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewController.swift; sourceTree = "<group>"; };
-		FFB3D2A228F820DE005EAAF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFB3D2A528F820DE005EAAF5 /* Stopoint.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stopoint.xcdatamodel; sourceTree = "<group>"; };
 		FFB3D2A728F820DF005EAAF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FFB3D2AA28F820DF005EAAF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFB3D2AC28F820DF005EAAF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFB3D2B128F820DF005EAAF5 /* StopointTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StopointTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB3D2B528F820DF005EAAF5 /* StopointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopointTests.swift; sourceTree = "<group>"; };
@@ -155,9 +151,7 @@
 				FFB3D2CE28F820EB005EAAF5 /* Managers */,
 				FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */,
 				FFB3D29D28F820DE005EAAF5 /* SceneDelegate.swift */,
-				FFB3D2A128F820DE005EAAF5 /* Main.storyboard */,
 				FFB3D2A728F820DF005EAAF5 /* Assets.xcassets */,
-				FFB3D2A928F820DF005EAAF5 /* LaunchScreen.storyboard */,
 				FFB3D2AC28F820DF005EAAF5 /* Info.plist */,
 				FFB3D2A428F820DE005EAAF5 /* Stopoint.xcdatamodeld */,
 			);
@@ -360,9 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFB3D2AB28F820DF005EAAF5 /* LaunchScreen.storyboard in Resources */,
 				FFB3D2A828F820DF005EAAF5 /* Assets.xcassets in Resources */,
-				FFB3D2A328F820DE005EAAF5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,25 +461,6 @@
 			targetProxy = FFB3D2BC28F820DF005EAAF5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FFB3D2A128F820DE005EAAF5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FFB3D2A228F820DE005EAAF5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FFB3D2A928F820DF005EAAF5 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FFB3D2AA28F820DF005EAAF5 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FFB3D2C328F820DF005EAAF5 /* Debug */ = {
