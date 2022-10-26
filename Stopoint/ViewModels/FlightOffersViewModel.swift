@@ -47,21 +47,23 @@ class FlightOffersViewModel {
 
     // Função que pesquisa ofertas de voos mais baratas
     private func searchFlighOffers() {
-        API().getFlightOffers(flight: self.flight!, completion: {result in
-            switch result {
-            case .success(let data):
-                do {
-                    _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    self.offers = try JSONDecoder().decode(Offers.self, from: data)
-                    print(self.offers)
-                    self.delegate?.updateDatas()
-                } catch {
+        Token().verifyToken() {
+            API().getFlightOffers(flight: self.flight!, completion: {result in
+                switch result {
+                case .success(let data):
+                    do {
+                        _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                        self.offers = try JSONDecoder().decode(Offers.self, from: data)
+                        print(self.offers)
+                        self.delegate?.updateDatas()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
                     print(error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        })
+            })
+        }
     }
 
     // Função que pega o nome da cidade e localização de cada cidade

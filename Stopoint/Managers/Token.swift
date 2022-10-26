@@ -40,13 +40,14 @@ class Token {
     }
 
     // Atualiza o account
-    func updateTokenInformation() {
+    func updateTokenInformation(completion: @escaping () -> Void) {
         tokenService.getTokenInformation(completion: { result in
             switch result {
             case .success(let data):
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.account = try JSONDecoder().decode(Account.self, from: data)
+                    completion()
                 } catch {
                     print(error)
                 }
@@ -57,10 +58,13 @@ class Token {
     }
 
     // Função que verifica o token e atualiza caso necessário
-    func verifyToken() {
-        self.updateTokenInformation()
-        if self.account.expireTokenTime < 10 {
-            self.generateAccessToken(completion: {})
+    func verifyToken(completion: @escaping () -> Void) {
+        self.updateTokenInformation {
+            if self.account.expireTokenTime < 10 {
+                self.generateAccessToken(completion: completion)
+            } else {
+                completion()
+            }
         }
     }
 }
