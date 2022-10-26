@@ -11,8 +11,8 @@ class OfferTableViewCell: UITableViewCell {
 
     static let identifier = "cell"
 
-    var offerComponent: OfferView = {
-        var view = OfferView()
+    var offerComponent: OfferViewComponent = {
+        var view = OfferViewComponent()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -37,6 +37,12 @@ class OfferTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+
+    func configure(package: TravelPackage, locations: [Location]) {
+        offerComponent.inserctTravelers(travellerPrincingList: package.travelerPricings)
+        offerComponent.generateTotalView(price: package.price)
+        offerComponent.generateRouteStackView(itineraries: package.itineraries[0], locations: locations)
     }
 
     private func setConstraints() {

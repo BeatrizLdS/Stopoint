@@ -10,34 +10,28 @@ import UIKit
 class FlightOffersViewController: UIViewController {
 
     var viewModel: FlightOffersViewModel?
+    var offersView: OffersView?
 
-    var flightOffersTableView: UITableView = {
-        let table = UITableView()
-        table.separatorStyle = .none
-        table.backgroundColor = .systemBackground
-        // registra célula
-        table.register(OfferTableViewCell.self, forCellReuseIdentifier: OfferTableViewCell.identifier)
-        return table
-    }()
+    init(flight: Flight) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = FlightOffersViewModel(flight: flight)
+        self.offersView = OffersView()
+    }
 
-    override func viewWillAppear(_ animated: Bool) {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ofertas"
+        view = offersView
         view.backgroundColor = .systemBackground
-        view.addSubview(flightOffersTableView)
 
-        flightOffersTableView.delegate = self
-        flightOffersTableView.dataSource = self
+        offersView?.flightOffersTableView.delegate = self
+        offersView?.flightOffersTableView.dataSource = self
         viewModel?.delegate = self
         viewModel!.generateDatas()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        flightOffersTableView.frame = view.bounds
     }
 }
 
@@ -60,10 +54,7 @@ extension FlightOffersViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let currentPackage = viewModel?.loadCurrentRoute(indexPath: indexPath)
-        cell.offerComponent.inserctTravelers(travellerPrincingList: currentPackage!.travelerPricings)
-        cell.offerComponent.generateTotalView(price: currentPackage!.price)
-        cell.offerComponent.generateRouteStackView(itineraries: currentPackage!.itineraries[0],
-                                                   locations: viewModel!.citysList)
+        cell.configure(package: currentPackage!, locations: viewModel!.citysList)
         return cell
     }
 
@@ -76,7 +67,10 @@ extension FlightOffersViewController: UITableViewDelegate {
 extension FlightOffersViewController: DataDelegate {
     func updateDatas() {
         Task {
-            self.flightOffersTableView.reloadData()
+            self.offersView?.flightOffersTableView.reloadData()
+            self.offersView?.progressView.stopAnimating()
+            self.offersView?.progressView.isHidden = true
+            self.offersView?.flightOffersTableView.isHidden = false
         }
     }
 }

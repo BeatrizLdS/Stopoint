@@ -10,6 +10,7 @@
 		FF2DFF292900280A00CA6544 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFF282900280A00CA6544 /* StringExtension.swift */; };
 		FF2DFF302900557E00CA6544 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFF2F2900557E00CA6544 /* FormViewModel.swift */; };
 		FF2DFF32290055A900CA6544 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFF31290055A900CA6544 /* FormViewController.swift */; };
+		FF6BDA902909A9C30038C127 /* OffersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6BDA8F2909A9C30038C127 /* OffersView.swift */; };
 		FF6C0EDC29098D3900D2415B /* FormVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6C0EDB29098D3900D2415B /* FormVIew.swift */; };
 		FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */; };
 		FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29D28F820DE005EAAF5 /* SceneDelegate.swift */; };
@@ -36,7 +37,7 @@
 		FFF8F8032901721700A0D778 /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F8022901721700A0D778 /* Warning.swift */; };
 		FFF8F80629018E5900A0D778 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80529018E5900A0D778 /* Protocols.swift */; };
 		FFF8F80A290193BB00A0D778 /* OfferTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */; };
-		FFF8F80C2901942700A0D778 /* OfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80B2901942700A0D778 /* OfferView.swift */; };
+		FFF8F80C2901942700A0D778 /* OfferViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80B2901942700A0D778 /* OfferViewComponent.swift */; };
 		FFF8F81029062FF800A0D778 /* TokenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F80F29062FF800A0D778 /* TokenSpec.swift */; };
 		FFF8F81229063D0100A0D778 /* MockTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F81129063D0100A0D778 /* MockTokenService.swift */; };
 		FFF8F8192906E29300A0D778 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8F8182906E29300A0D778 /* RoutesView.swift */; };
@@ -63,6 +64,7 @@
 		FF2DFF282900280A00CA6544 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		FF2DFF2F2900557E00CA6544 /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
 		FF2DFF31290055A900CA6544 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		FF6BDA8F2909A9C30038C127 /* OffersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersView.swift; sourceTree = "<group>"; };
 		FF6C0EDB29098D3900D2415B /* FormVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVIew.swift; sourceTree = "<group>"; };
 		FFB3D29828F820DE005EAAF5 /* Stopoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stopoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		FFF8F8022901721700A0D778 /* Warning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
 		FFF8F80529018E5900A0D778 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferTableViewCell.swift; sourceTree = "<group>"; };
-		FFF8F80B2901942700A0D778 /* OfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferView.swift; sourceTree = "<group>"; };
+		FFF8F80B2901942700A0D778 /* OfferViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewComponent.swift; sourceTree = "<group>"; };
 		FFF8F80F29062FF800A0D778 /* TokenSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSpec.swift; sourceTree = "<group>"; };
 		FFF8F81129063D0100A0D778 /* MockTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTokenService.swift; sourceTree = "<group>"; };
 		FFF8F8182906E29300A0D778 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF6BDA8E2909A9B20038C127 /* Offers */ = {
+			isa = PBXGroup;
+			children = (
+				FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */,
+				FFF8F80B2901942700A0D778 /* OfferViewComponent.swift */,
+				FF6BDA8F2909A9C30038C127 /* OffersView.swift */,
+			);
+			path = Offers;
+			sourceTree = "<group>";
+		};
 		FF6C0EDA29098D2900D2415B /* Form */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,10 +215,9 @@
 		FFB3D2CF28F8210B005EAAF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FF6BDA8E2909A9B20038C127 /* Offers */,
 				FF6C0EDA29098D2900D2415B /* Form */,
 				FFF8F8172906E24700A0D778 /* Routes */,
-				FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */,
-				FFF8F80B2901942700A0D778 /* OfferView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -422,7 +433,7 @@
 				FF2DFF32290055A900CA6544 /* FormViewController.swift in Sources */,
 				FFF8F80129007BE400A0D778 /* RouteComponent.swift in Sources */,
 				FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */,
-				FFF8F80C2901942700A0D778 /* OfferView.swift in Sources */,
+				FFF8F80C2901942700A0D778 /* OfferViewComponent.swift in Sources */,
 				FFB3D2EC28FD859E005EAAF5 /* FlightOffersViewController.swift in Sources */,
 				FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */,
 				FFF8F8032901721700A0D778 /* Warning.swift in Sources */,
@@ -439,6 +450,7 @@
 				FFB3D2DF28F852BE005EAAF5 /* Account.swift in Sources */,
 				FFB3D2E628F9A9BA005EAAF5 /* Locations.swift in Sources */,
 				FFB3D2EA28FD84FC005EAAF5 /* Flight.swift in Sources */,
+				FF6BDA902909A9C30038C127 /* OffersView.swift in Sources */,
 				FFB3D2D828F822A3005EAAF5 /* URL.swift in Sources */,
 				FFB3D2DD28F852A0005EAAF5 /* RoutesViewModel.swift in Sources */,
 			);
