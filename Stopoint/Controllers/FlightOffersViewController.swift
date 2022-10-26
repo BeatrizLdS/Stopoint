@@ -25,8 +25,8 @@ class FlightOffersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ofertas"
-        view.backgroundColor = .systemBackground
         view = offersView
+        view.backgroundColor = .systemBackground
 
         offersView?.flightOffersTableView.delegate = self
         offersView?.flightOffersTableView.dataSource = self
@@ -71,6 +71,9 @@ extension FlightOffersViewController: DataDelegate {
     func updateDatas() {
         Task {
             self.offersView?.flightOffersTableView.reloadData()
+            self.offersView?.progressView.stopAnimating()
+            self.offersView?.progressView.isHidden = true
+            self.offersView?.flightOffersTableView.isHidden = false
         }
     }
 }
