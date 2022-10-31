@@ -7,10 +7,12 @@
 
 import Foundation
 
-protocol RoutesDelegate {
+
+protocol RoutesDelegate: AnyObject {
     func updateRoute(destiny: String)
 }
 
-protocol DataDelegate {
+protocol DataDelegate: AnyObject {
+    func errorProduced(error: CustomError)
     func updateDatas()
 }

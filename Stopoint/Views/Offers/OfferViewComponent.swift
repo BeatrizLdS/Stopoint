@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OfferView: UIView {
+class OfferViewComponent: UIView {
 
     var routeStackView: UIStackView = {
         let stack = UIStackView()
@@ -129,28 +129,34 @@ class OfferView: UIView {
         totalStackView.addArrangedSubview(valueLabel)
     }
 
-    public func generateRouteStackView(itineraries: Itinerarie, locations: [Location]) {
+    public func generateRouteStackView(itineraries: Itinerarie) {
         itineraries.segments?.forEach { segment in
             let routeView = RouteViewComponent()
-            if let city = locations.first(where: {$0.iataCode == segment.departure.location}) {
-                routeView.originLabel.text = city.name?.capitalizeFirstLetter()
-            } else {
-                routeView.originLabel.text = segment.departure.location
-            }
-            if let city = locations.first(where: {$0.iataCode == segment.arrival.location}) {
-                routeView.destinyLabel.text = city.name?.capitalizeFirstLetter()
-            } else {
-                routeView.destinyLabel.text = segment.arrival.location
-            }
-            routeView.originLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-            routeView.destinyLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+            routeView.originLabel.text = segment.departure.location
+            routeView.destinyLabel.text = segment.arrival.location
+            routeView.originLabel.font = UIFont.boldSystemFont(ofSize: 15.0)
+            routeView.destinyLabel.font = UIFont.boldSystemFont(ofSize: 15.0)
             routeView.translatesAutoresizingMaskIntoConstraints = false
 
             routeStackView.addArrangedSubview(routeView)
         }
     }
 
-    private func setConstraints() {
+    public func updateCitysName(itineraries: Itinerarie, locations: [Location]) {
+        locations.forEach { location in
+            routeStackView.arrangedSubviews.forEach({ view in
+                guard let routeView = view as? RouteViewComponent else {return}
+                if routeView.originLabel.text == location.iataCode {
+                    routeView.originLabel.text = location.name?.capitalizeFirstLetter()
+                }
+                if routeView.destinyLabel.text == location.iataCode {
+                    routeView.destinyLabel.text = location.name?.capitalizeFirstLetter()
+                }
+            })
+        }
+    }
+
+    public func setConstraints() {
         let routeStackViewConstraints = [
             routeStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             routeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),

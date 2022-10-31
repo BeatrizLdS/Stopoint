@@ -32,7 +32,7 @@ class RouteTableViewCell: UITableViewCell {
             // Todas essas animações rodam em paralelo
             UIView.animate(withDuration: 0.5) {
                 self.routeComponent.transform = CGAffineTransform(scaleX: 1.03, y: 1.03)
-                self.routeComponent.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.routeComponent.transform = .identity
             }
             UIView.animate(withDuration: 0.5) {
                 self.routeComponent.layer.borderWidth = 4
@@ -40,7 +40,7 @@ class RouteTableViewCell: UITableViewCell {
             }
             UIView.animate(withDuration: 0.5) {
                 self.routeComponent.airplaneImage.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                self.routeComponent.airplaneImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.routeComponent.airplaneImage.transform = .identity
             }
             isSelected = false
         }
@@ -61,6 +61,11 @@ class RouteTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+    }
+
+    public func configure(location: Location) {
+        self.routeComponent.originLabel.text = "Fortaleza"
+        self.routeComponent.destinyLabel.text = location.name?.capitalizeFirstLetter()
     }
 
     private func setConstraints() {

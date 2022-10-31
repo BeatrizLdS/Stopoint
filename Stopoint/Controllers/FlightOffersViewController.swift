@@ -10,34 +10,28 @@ import UIKit
 class FlightOffersViewController: UIViewController {
 
     var viewModel: FlightOffersViewModel?
+    var flightsOffersView: FlightsOffersView?
 
-    var flightOffersTableView: UITableView = {
-        let table = UITableView()
-        table.separatorStyle = .none
-        table.backgroundColor = .systemBackground
-        // registra célula
-        table.register(OfferTableViewCell.self, forCellReuseIdentifier: OfferTableViewCell.identifier)
-        return table
-    }()
+    init(flight: Flight) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = FlightOffersViewModel(flight: flight)
+        self.flightsOffersView = FlightsOffersView()
+    }
 
-    override func viewWillAppear(_ animated: Bool) {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ofertas"
+        view = flightsOffersView
         view.backgroundColor = .systemBackground
-        view.addSubview(flightOffersTableView)
 
-        flightOffersTableView.delegate = self
-        flightOffersTableView.dataSource = self
+        flightsOffersView?.flightOffersTableView.delegate = self
+        flightsOffersView?.flightOffersTableView.dataSource = self
         viewModel?.delegate = self
         viewModel!.generateDatas()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        flightOffersTableView.frame = view.bounds
     }
 }
 
@@ -60,13 +54,19 @@ extension FlightOffersViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let currentPackage = viewModel?.loadCurrentRoute(indexPath: indexPath)
-        cell.offerComponent.inserctTravelers(travellerPrincingList: currentPackage!.travelerPricings)
-        cell.offerComponent.generateTotalView(price: currentPackage!.price)
-        cell.offerComponent.generateRouteStackView(itineraries: currentPackage!.itineraries[0],
-                                                   locations: viewModel!.citysList)
+        cell.configure(package: currentPackage!, locations: viewModel!.citysList)
         return cell
     }
 
+    // Função que gera um alerta
+    private func generatAlert(warning: Warning) {
+        let alert = UIAlertController(title: warning.title,
+                                      message: warning.message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension FlightOffersViewController: UITableViewDelegate {
@@ -74,9 +74,23 @@ extension FlightOffersViewController: UITableViewDelegate {
 }
 
 extension FlightOffersViewController: DataDelegate {
+    func errorProduced(error: CustomError) {
+        switch error {
+        case .offersNotFound:
+            let warning = Warning(title: "Nenhuma oferta encontrada!",
+                                  message: "Nenhuma oferta foi encontrada com essa configuração!")
+            Task {
+                generatAlert(warning: warning)
+            }
+        }
+    }
+
     func updateDatas() {
         Task {
-            self.flightOffersTableView.reloadData()
+            self.flightsOffersView?.flightOffersTableView.reloadData()
+            self.flightsOffersView?.progressView.stopAnimating()
+            self.flightsOffersView?.progressView.isHidden = true
+            self.flightsOffersView?.flightOffersTableView.isHidden = false
         }
     }
 }

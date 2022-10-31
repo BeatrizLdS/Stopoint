@@ -9,23 +9,7 @@ import UIKit
 
 class RoutesViewController: UIViewController {
     var viewModel: RoutesViewModel?
-
-    var avaliableRoutesTable: UITableView = {
-        let table = UITableView()
-        table.separatorStyle = .none
-        table.backgroundColor = .systemBackground
-        // registra célula
-        table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
-        return table
-    }()
-
-    var getRoutesButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("get flights", for: .normal)
-        button.configuration = .filled()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    var routesView = RoutesView()
 
     // Função chamada na primeira vez que a view vai ser criada
     override func loadView() {
@@ -36,25 +20,17 @@ class RoutesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Rotas"
-        view.backgroundColor = .systemBackground
-        view.addSubview(avaliableRoutesTable)
-        avaliableRoutesTable.delegate = self
-        avaliableRoutesTable.dataSource = self
+        view = routesView
+
+        routesView.avaliableRoutesTable.delegate = self
+        routesView.avaliableRoutesTable.dataSource = self
         viewModel?.delegate = self
+
         viewModel!.getAirportRoutes()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        avaliableRoutesTable.frame = view.bounds
-    }
-
-    func setConstraints() {
-        let getRoutesButtonConstraints = [
-            getRoutesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            getRoutesButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ]
-        NSLayoutConstraint.activate(getRoutesButtonConstraints)
     }
 }
 
@@ -76,18 +52,18 @@ extension RoutesViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RouteTableViewCell.identifier, for: indexPath) as? RouteTableViewCell else {
             return UITableViewCell()
         }
-        cell.routeComponent.originLabel.text = "Fortaleza"
-        cell.routeComponent.destinyLabel.text = viewModel?.loadCurrentRoute(indexPath: indexPath).name?.capitalizeFirstLetter()
+        let currentRoute = viewModel?.loadCurrentRoute(indexPath: indexPath)
+        cell.configure(location: currentRoute!)
         return cell
     }
 
     // Função que define a ação da seleção de uma linha
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let haptics = UISelectionFeedbackGenerator()
+        haptics.selectionChanged()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
             let location = (self.viewModel?.loadCurrentRoute(indexPath: indexPath))
-            let formVM = FormViewModel(location: location)
-            let nextController = FormViewController()
-            nextController.viewModel = formVM
+            let nextController = FormViewController(location: location!)
             self.navigationController?.pushViewController(nextController, animated: true)
         })
     }
@@ -98,9 +74,15 @@ extension RoutesViewController: UITableViewDelegate {
 }
 
 extension RoutesViewController: DataDelegate {
+    func errorProduced(error: CustomError) {
+    }
+
     func updateDatas() {
         Task {
-            self.avaliableRoutesTable.reloadData()
+            self.routesView.avaliableRoutesTable.reloadData()
+            self.routesView.progressView.stopAnimating()
+            self.routesView.progressView.isHidden = true
+            self.routesView.avaliableRoutesTable.isHidden = false
         }
     }
 }

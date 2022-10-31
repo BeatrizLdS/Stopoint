@@ -56,8 +56,6 @@ class API {
                 completion(.failure(error!))
                 return
             }
-
-            print("token foi gerado")
             completion(.success(data))
 
         })
