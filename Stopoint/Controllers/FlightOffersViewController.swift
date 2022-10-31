@@ -65,7 +65,13 @@ extension FlightOffersViewController: UITableViewDelegate {
 }
 
 extension FlightOffersViewController: DataDelegate {
-    
+    func errorProduced(error: CustomError) {
+        switch error {
+        case .offersNotFound:
+            print("Tratamento de erro")
+        }
+    }
+
     func updateDatas() {
         Task {
             self.flightsOffersView?.flightOffersTableView.reloadData()

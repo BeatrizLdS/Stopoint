@@ -74,6 +74,9 @@ extension RoutesViewController: UITableViewDelegate {
 }
 
 extension RoutesViewController: DataDelegate {
+    func errorProduced(error: CustomError) {
+    }
+
     func updateDatas() {
         Task {
             self.routesView.avaliableRoutesTable.reloadData()
