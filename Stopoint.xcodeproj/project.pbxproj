@@ -10,7 +10,7 @@
 		FF2DFF292900280A00CA6544 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFF282900280A00CA6544 /* StringExtension.swift */; };
 		FF2DFF302900557E00CA6544 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFF2F2900557E00CA6544 /* FormViewModel.swift */; };
 		FF2DFF32290055A900CA6544 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFF31290055A900CA6544 /* FormViewController.swift */; };
-		FF6BDA902909A9C30038C127 /* OffersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6BDA8F2909A9C30038C127 /* OffersView.swift */; };
+		FF6BDA902909A9C30038C127 /* FlightsOffersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6BDA8F2909A9C30038C127 /* FlightsOffersView.swift */; };
 		FF6C0EDC29098D3900D2415B /* FormVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6C0EDB29098D3900D2415B /* FormVIew.swift */; };
 		FFB3D29C28F820DE005EAAF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */; };
 		FFB3D29E28F820DE005EAAF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3D29D28F820DE005EAAF5 /* SceneDelegate.swift */; };
@@ -64,7 +64,7 @@
 		FF2DFF282900280A00CA6544 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		FF2DFF2F2900557E00CA6544 /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
 		FF2DFF31290055A900CA6544 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
-		FF6BDA8F2909A9C30038C127 /* OffersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersView.swift; sourceTree = "<group>"; };
+		FF6BDA8F2909A9C30038C127 /* FlightsOffersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsOffersView.swift; sourceTree = "<group>"; };
 		FF6C0EDB29098D3900D2415B /* FormVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVIew.swift; sourceTree = "<group>"; };
 		FFB3D29828F820DE005EAAF5 /* Stopoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stopoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB3D29B28F820DE005EAAF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 			children = (
 				FFF8F809290193BB00A0D778 /* OfferTableViewCell.swift */,
 				FFF8F80B2901942700A0D778 /* OfferViewComponent.swift */,
-				FF6BDA8F2909A9C30038C127 /* OffersView.swift */,
+				FF6BDA8F2909A9C30038C127 /* FlightsOffersView.swift */,
 			);
 			path = Offers;
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 				FFB3D2DF28F852BE005EAAF5 /* Account.swift in Sources */,
 				FFB3D2E628F9A9BA005EAAF5 /* Locations.swift in Sources */,
 				FFB3D2EA28FD84FC005EAAF5 /* Flight.swift in Sources */,
-				FF6BDA902909A9C30038C127 /* OffersView.swift in Sources */,
+				FF6BDA902909A9C30038C127 /* FlightsOffersView.swift in Sources */,
 				FFB3D2D828F822A3005EAAF5 /* URL.swift in Sources */,
 				FFB3D2DD28F852A0005EAAF5 /* RoutesViewModel.swift in Sources */,
 			);

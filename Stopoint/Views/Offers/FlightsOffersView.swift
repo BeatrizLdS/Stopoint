@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OffersView: UIView {
+class FlightsOffersView: UIView {
 
     lazy var progressView: UIActivityIndicatorView = {
         let progressView = UIActivityIndicatorView(style: .medium)

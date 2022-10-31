@@ -10,12 +10,12 @@ import UIKit
 class FlightOffersViewController: UIViewController {
 
     var viewModel: FlightOffersViewModel?
-    var offersView: OffersView?
+    var flightsOffersView: FlightsOffersView?
 
     init(flight: Flight) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = FlightOffersViewModel(flight: flight)
-        self.offersView = OffersView()
+        self.flightsOffersView = FlightsOffersView()
     }
 
     required init?(coder: NSCoder) {
@@ -25,11 +25,11 @@ class FlightOffersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ofertas"
-        view = offersView
+        view = flightsOffersView
         view.backgroundColor = .systemBackground
 
-        offersView?.flightOffersTableView.delegate = self
-        offersView?.flightOffersTableView.dataSource = self
+        flightsOffersView?.flightOffersTableView.delegate = self
+        flightsOffersView?.flightOffersTableView.dataSource = self
         viewModel?.delegate = self
         viewModel!.generateDatas()
     }
@@ -65,12 +65,13 @@ extension FlightOffersViewController: UITableViewDelegate {
 }
 
 extension FlightOffersViewController: DataDelegate {
+    
     func updateDatas() {
         Task {
-            self.offersView?.flightOffersTableView.reloadData()
-            self.offersView?.progressView.stopAnimating()
-            self.offersView?.progressView.isHidden = true
-            self.offersView?.flightOffersTableView.isHidden = false
+            self.flightsOffersView?.flightOffersTableView.reloadData()
+            self.flightsOffersView?.progressView.stopAnimating()
+            self.flightsOffersView?.progressView.isHidden = true
+            self.flightsOffersView?.flightOffersTableView.isHidden = false
         }
     }
 }
