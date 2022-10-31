@@ -67,11 +67,11 @@ extension FlightOffersViewController: UITableViewDelegate {
 
 // MARK: Implementação do protocolo que gera e verifica as ofertas
 extension FlightOffersViewController: DataDelegate {
-    func errorProduced(error: CustomError) {
+    func errorProduced(error: CustomErrors) {
         switch error {
         case .offersNotFound:
             let warning = Warning(title: "Nenhuma oferta encontrada!",
-                                  message: "Nenhuma oferta foi encontrada com essa configuração!")
+                                  message: error.localizedDescription)
             alertService.warning = warning
             Task {
                 self.present(alertService.generateAlert(), animated: true)

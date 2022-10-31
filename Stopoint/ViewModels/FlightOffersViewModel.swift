@@ -44,7 +44,7 @@ class FlightOffersViewModel {
     public func generateDatas() {
         searchFlighOffers {
             if self.offers?.offers == nil {
-                self.delegate?.errorProduced(error: CustomError.offersNotFound)
+                self.delegate?.errorProduced(error: CustomErrors.offersNotFound)
                 return
             }
             self.getCityDetails(completion: {
