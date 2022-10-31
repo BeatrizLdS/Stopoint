@@ -58,6 +58,15 @@ extension FlightOffersViewController: UITableViewDataSource {
         return cell
     }
 
+    // Função que gera um alerta
+    private func generatAlert(warning: Warning) {
+        let alert = UIAlertController(title: warning.title,
+                                      message: warning.message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension FlightOffersViewController: UITableViewDelegate {
@@ -65,7 +74,17 @@ extension FlightOffersViewController: UITableViewDelegate {
 }
 
 extension FlightOffersViewController: DataDelegate {
-    
+    func errorProduced(error: CustomError) {
+        switch error {
+        case .offersNotFound:
+            let warning = Warning(title: "Nenhuma oferta encontrada!",
+                                  message: "Nenhuma oferta foi encontrada com essa configuração!")
+            Task {
+                generatAlert(warning: warning)
+            }
+        }
+    }
+
     func updateDatas() {
         Task {
             self.flightsOffersView?.flightOffersTableView.reloadData()

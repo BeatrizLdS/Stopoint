@@ -43,6 +43,10 @@ class FlightOffersViewModel {
     // Função que gera os dados para a controller
     public func generateDatas() {
         searchFlighOffers {
+            if self.offers?.offers == nil {
+                self.delegate?.errorProduced(error: CustomError.offersNotFound)
+                return
+            }
             self.getCityDetails(completion: {
                 self.delegate?.updateDatas()
             })

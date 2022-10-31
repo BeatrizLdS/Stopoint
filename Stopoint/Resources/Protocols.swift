@@ -13,5 +13,6 @@ protocol RoutesDelegate: AnyObject {
 }
 
 protocol DataDelegate: AnyObject {
+    func errorProduced(error: CustomError)
     func updateDatas()
 }
