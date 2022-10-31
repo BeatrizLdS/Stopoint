@@ -42,40 +42,52 @@ class FlightOffersViewModel {
 
     // Função que gera os dados para a controller
     public func generateDatas() {
-        searchFlighOffers {
-            if self.offers?.offers == nil {
-                self.delegate?.errorProduced(error: CustomError.offersNotFound)
+        searchFlighOffers { error in
+            if error != nil {
+                self.delegate?.errorProduced(error: error!)
                 return
             }
-            self.getCityDetails(completion: {
+            if self.offers?.offers == nil {
+                self.delegate?.errorProduced(error: CustomErrors.offersNotFound)
+                return
+            }
+            self.getCityDetails(completion: { errorResult in
+                if errorResult != nil {
+                    self.delegate?.errorProduced(error: errorResult!)
+                    return
+                }
                 self.delegate?.updateDatas()
             })
         }
     }
 
     // Função que pesquisa ofertas de voos mais baratas
-    private func searchFlighOffers(completion: @escaping () -> Void) {
-        Token().verifyToken {
+    private func searchFlighOffers(completion: @escaping (CustomErrors?) -> Void) {
+        Token().verifyToken { errorToken in
+            if errorToken != nil {
+                completion(errorToken)
+                return
+            }
             API().getFlightOffers(flight: self.flight!, completion: {result in
                 switch result {
                 case .success(let data):
                     do {
                         _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                         self.offers = try JSONDecoder().decode(Offers.self, from: data)
-                        completion()
+                        completion(nil)
                         self.delegate?.updateDatas()
                     } catch {
-                        print(error.localizedDescription)
+                        completion(.invalidResponse)
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    completion(error)
                 }
             })
         }
     }
 
     // Função que pega o nome da cidade e localização de cada cidade
-    private func getCityDetails(completion: @escaping () -> Void) {
+    private func getCityDetails(completion: @escaping (CustomErrors?) -> Void) {
         let list = offers!.dictionaries!.locations
         for (file) in (list) {
             API().getCityByKeyword(city: file.value) { result in
@@ -87,13 +99,13 @@ class FlightOffersViewModel {
                         let officialCity = options.routes?.first(where: {$0.iataCode == file.value.cityCode})
                         if officialCity != nil {
                             self.citysList.append(officialCity!)
-                            completion()
+                            completion(nil)
                         }
                     } catch {
-                        print(error.localizedDescription)
+                        completion(.invalidResponse)
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    completion(error)
                 }
             }
         }

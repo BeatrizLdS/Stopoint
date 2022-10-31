@@ -9,6 +9,7 @@ import UIKit
 
 class FlightOffersViewController: UIViewController {
 
+    var alertService = AlertService()
     var viewModel: FlightOffersViewModel?
     var flightsOffersView: FlightsOffersView?
 
@@ -16,6 +17,7 @@ class FlightOffersViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = FlightOffersViewModel(flight: flight)
         self.flightsOffersView = FlightsOffersView()
+        self.alertService.alertActionDelegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -35,7 +37,7 @@ class FlightOffersViewController: UIViewController {
     }
 }
 
-// Protocólo responsável por determinar as células e seus dados
+// MARK: Protocólo responsável por determinar as células e seus dados
 extension FlightOffersViewController: UITableViewDataSource {
 
     // Função que define a altura de cada linha
@@ -57,30 +59,36 @@ extension FlightOffersViewController: UITableViewDataSource {
         cell.configure(package: currentPackage!, locations: viewModel!.citysList)
         return cell
     }
-
-    // Função que gera um alerta
-    private func generatAlert(warning: Warning) {
-        let alert = UIAlertController(title: warning.title,
-                                      message: warning.message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-            self.navigationController?.popViewController(animated: true)
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
 }
 
 extension FlightOffersViewController: UITableViewDelegate {
 
 }
 
+// MARK: Implementação do protocolo que gera e verifica as ofertas
 extension FlightOffersViewController: DataDelegate {
-    func errorProduced(error: CustomError) {
+    func errorProduced(error: CustomErrors) {
         switch error {
         case .offersNotFound:
             let warning = Warning(title: "Nenhuma oferta encontrada!",
-                                  message: "Nenhuma oferta foi encontrada com essa configuração!")
+                                  message: error.localizedDescription)
+            alertService.warning = warning
             Task {
-                generatAlert(warning: warning)
+                self.present(alertService.generateAlert(), animated: true)
+            }
+        case .invalidRequest:
+            let warning = Warning(title: "Falha de conexão!",
+                                  message: error.localizedDescription)
+            alertService.warning = warning
+            Task {
+                self.present(alertService.generateAlert(), animated: true)
+            }
+        case .invalidResponse:
+            let warning = Warning(title: "Problemas com o servidor!",
+                                  message: error.localizedDescription)
+            alertService.warning = warning
+            Task {
+                self.present(alertService.generateAlert(), animated: true)
             }
         }
     }
@@ -92,5 +100,12 @@ extension FlightOffersViewController: DataDelegate {
             self.flightsOffersView?.progressView.isHidden = true
             self.flightsOffersView?.flightOffersTableView.isHidden = false
         }
+    }
+}
+
+// MARK: Implementação do protocolo que gera os alertar
+extension FlightOffersViewController: AlertDelegate {
+    func alertAction() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

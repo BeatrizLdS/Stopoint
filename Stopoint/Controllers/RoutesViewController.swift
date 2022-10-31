@@ -8,12 +8,15 @@
 import UIKit
 
 class RoutesViewController: UIViewController {
+
+    var alertService = AlertService()
     var viewModel: RoutesViewModel?
     var routesView = RoutesView()
 
     // Função chamada na primeira vez que a view vai ser criada
     override func loadView() {
         super.loadView()
+        alertService.alertActionDelegate = self
         viewModel = RoutesViewModel(routes: Routes())
     }
 
@@ -34,7 +37,7 @@ class RoutesViewController: UIViewController {
     }
 }
 
-// Protocolo responsável por determinar as células e seus dados
+// MARK: Protocólo responsável por determinar as células e seus dados
 extension RoutesViewController: UITableViewDataSource {
 
     // Número de linhas em cada seção
@@ -73,8 +76,32 @@ extension RoutesViewController: UITableViewDelegate {
 
 }
 
+// MARK: Implementação do protocolo que gera e verifica as ofertas
 extension RoutesViewController: DataDelegate {
-    func errorProduced(error: CustomError) {
+    func errorProduced(error: CustomErrors) {
+        switch error {
+        case .offersNotFound:
+            let warning = Warning(title: "Nenhuma oferta encontrada!",
+                                  message: error.localizedDescription)
+            alertService.warning = warning
+            Task {
+                self.present(alertService.generateAlert(), animated: true)
+            }
+        case .invalidRequest:
+            let warning = Warning(title: "Falha de conexão!",
+                                  message: error.localizedDescription)
+            alertService.warning = warning
+            Task {
+                self.present(alertService.generateAlert(), animated: true)
+            }
+        case .invalidResponse:
+            let warning = Warning(title: "Problemas com o servidor!",
+                                  message: error.localizedDescription)
+            alertService.warning = warning
+            Task {
+                self.present(alertService.generateAlert(), animated: true)
+            }
+        }
     }
 
     func updateDatas() {
@@ -84,5 +111,12 @@ extension RoutesViewController: DataDelegate {
             self.routesView.progressView.isHidden = true
             self.routesView.avaliableRoutesTable.isHidden = false
         }
+    }
+}
+
+// MARK: Implementação do protocolo que gera os alertar
+extension RoutesViewController: AlertDelegate {
+    func alertAction() {
+        self.viewModel?.getAirportRoutes()
     }
 }
