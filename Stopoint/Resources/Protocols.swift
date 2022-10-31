@@ -7,6 +7,9 @@
 
 import Foundation
 
+protocol alertDelegate: AnyObject {
+    func alertAction()
+}
 
 protocol RoutesDelegate: AnyObject {
     func updateRoute(destiny: String)

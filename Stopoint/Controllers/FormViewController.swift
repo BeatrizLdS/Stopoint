@@ -9,6 +9,7 @@ import UIKit
 
 class FormViewController: UIViewController {
 
+    var alertService = AlertService()
     var viewModel: FormViewModel?
     var formView: FormView?
 
@@ -16,6 +17,7 @@ class FormViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = FormViewModel(location: location)
         self.formView = FormView()
+        self.alertService.alertActionDelegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -46,7 +48,8 @@ class FormViewController: UIViewController {
         if formView?.childrensNumberTextField.text == "" && formView?.adultsNumberTextField.text == "" {
             let warning = Warning(title: "Nenhuma passageiro!",
                                   message: "Adicione pelo menos uma pessoa para buscar a viagem!")
-            generatAlert(warning: warning)
+            alertService.warning = warning
+            self.present(alertService.generateAlert(), animated: true)
             return
         }
         let dateFormatter = DateFormatter()
@@ -56,7 +59,8 @@ class FormViewController: UIViewController {
         if nowDate != datePickerFormatted && (formView?.datePickerView.date)! < Date.now {
             let warning = Warning(title: "Data inválida!",
                                   message: "Insira uma data no presente ou no futuro!")
-            generatAlert(warning: warning)
+            alertService.warning = warning
+            self.present(alertService.generateAlert(), animated: true)
             return
         }
         let settedFlight: Flight = Flight(route: ["FOR", viewModel?.location?.iataCode],
@@ -67,24 +71,23 @@ class FormViewController: UIViewController {
         navigationController?.pushViewController(nextController, animated: true)
     }
 
-    // Função que gera um alerta
-    private func generatAlert(warning: Warning) {
-        let alert = UIAlertController(title: warning.title,
-                                      message: warning.message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-
     // Função que atualiza os dados da ViewModel
     private func fetchData() {
         viewModel!.fetchData()
     }
 }
 
+// MARK: Implementação do protocolo que gera as rotas
 extension FormViewController: RoutesDelegate {
     // Função que recebe os dados vindos da viewModel
     func updateRoute(destiny: String) {
         formView?.routeView.originLabel.text = "Fortaleza"
         formView?.routeView.destinyLabel.text = destiny.capitalizeFirstLetter()
+    }
+}
+
+// MARK: Implementação do protocolo que gera os alertar
+extension FormViewController: alertDelegate {
+    func alertAction() {
     }
 }
