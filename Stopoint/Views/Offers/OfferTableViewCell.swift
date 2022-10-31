@@ -40,9 +40,13 @@ class OfferTableViewCell: UITableViewCell {
     }
 
     func configure(package: TravelPackage, locations: [Location]) {
-        offerComponent.inserctTravelers(travellerPrincingList: package.travelerPricings)
-        offerComponent.generateTotalView(price: package.price)
-        offerComponent.generateRouteStackView(itineraries: package.itineraries[0], locations: locations)
+        if offerComponent.routeStackView.arrangedSubviews.isEmpty {
+            offerComponent.inserctTravelers(travellerPrincingList: package.travelerPricings)
+            offerComponent.generateTotalView(price: package.price)
+            offerComponent.generateRouteStackView(itineraries: package.itineraries[0])
+        } else {
+            offerComponent.updateCitysName(itineraries: package.itineraries[0], locations: locations)
+        }
     }
 
     private func setConstraints() {

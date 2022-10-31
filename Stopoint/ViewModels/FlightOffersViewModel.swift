@@ -42,19 +42,23 @@ class FlightOffersViewModel {
 
     // Função que gera os dados para a controller
     public func generateDatas() {
-        searchFlighOffers()
+        searchFlighOffers {
+            self.getCityDetails(completion: {
+                self.delegate?.updateDatas()
+            })
+        }
     }
 
     // Função que pesquisa ofertas de voos mais baratas
-    private func searchFlighOffers() {
-        Token().verifyToken() {
+    private func searchFlighOffers(completion: @escaping () -> Void) {
+        Token().verifyToken {
             API().getFlightOffers(flight: self.flight!, completion: {result in
                 switch result {
                 case .success(let data):
                     do {
                         _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                         self.offers = try JSONDecoder().decode(Offers.self, from: data)
-                        print(self.offers)
+                        completion()
                         self.delegate?.updateDatas()
                     } catch {
                         print(error.localizedDescription)
@@ -67,7 +71,7 @@ class FlightOffersViewModel {
     }
 
     // Função que pega o nome da cidade e localização de cada cidade
-    private func getCityDetails() {
+    private func getCityDetails(completion: @escaping () -> Void) {
         let list = offers!.dictionaries!.locations
         for (file) in (list) {
             API().getCityByKeyword(city: file.value) { result in
@@ -79,6 +83,7 @@ class FlightOffersViewModel {
                         let officialCity = options.routes?.first(where: {$0.iataCode == file.value.cityCode})
                         if officialCity != nil {
                             self.citysList.append(officialCity!)
+                            completion()
                         }
                     } catch {
                         print(error.localizedDescription)
