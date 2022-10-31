@@ -87,7 +87,7 @@ extension FormViewController: RoutesDelegate {
 }
 
 // MARK: Implementação do protocolo que gera os alertar
-extension FormViewController: alertDelegate {
+extension FormViewController: AlertDelegate {
     func alertAction() {
     }
 }

@@ -76,6 +76,20 @@ extension FlightOffersViewController: DataDelegate {
             Task {
                 self.present(alertService.generateAlert(), animated: true)
             }
+        case .invalidRequest:
+            let warning = Warning(title: "Falha de conexão!",
+                                  message: error.localizedDescription)
+            alertService.warning = warning
+            Task {
+                self.present(alertService.generateAlert(), animated: true)
+            }
+        case .invalidResponse:
+            let warning = Warning(title: "Problemas com o servidor!",
+                                  message: error.localizedDescription)
+            alertService.warning = warning
+            Task {
+                self.present(alertService.generateAlert(), animated: true)
+            }
         }
     }
 
@@ -90,7 +104,7 @@ extension FlightOffersViewController: DataDelegate {
 }
 
 // MARK: Implementação do protocolo que gera os alertar
-extension FlightOffersViewController: alertDelegate {
+extension FlightOffersViewController: AlertDelegate {
     func alertAction() {
         self.navigationController?.popViewController(animated: true)
     }

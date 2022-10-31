@@ -7,7 +7,12 @@
 
 import Foundation
 
-protocol alertDelegate: AnyObject {
+protocol TokenServiceProtocol {
+    func generateToken(completion: @escaping (Result<Data, CustomErrors>) -> Void)
+    func getTokenInformation(completion: @escaping (Result<Data, CustomErrors>) -> Void)
+}
+
+protocol AlertDelegate: AnyObject {
     func alertAction()
 }
 

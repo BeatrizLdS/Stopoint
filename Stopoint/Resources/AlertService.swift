@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class AlertService {
-    var alertActionDelegate: alertDelegate?
+    var alertActionDelegate: AlertDelegate?
     var warning: Warning?
 
     init(_ warning: Warning? = nil) {

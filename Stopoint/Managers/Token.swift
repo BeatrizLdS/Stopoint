@@ -8,8 +8,6 @@
 import Foundation
 
 class Token {
-
-    var error: Error?
     var account: Account = Account(clientId: "", token: "", expireTokenTime: 0)
     private let tokenService: TokenServiceProtocol
 
@@ -18,7 +16,7 @@ class Token {
     }
 
     // Gera um token de aceso para a API e manda para a Controller
-    func generateAccessToken(completion: @escaping () -> Void) {
+    func generateAccessToken(completion: @escaping (CustomErrors?) -> Void) {
         tokenService.generateToken(completion: { result in
             switch result {
             case .success(let data):
@@ -27,43 +25,41 @@ class Token {
                     self.account = try JSONDecoder().decode(Account.self, from: data)
                     let token = Data(self.account.token.utf8)
                     KeychainHelper.standard.save(data: token, service: "access-token", account: "amadeus")
-                    completion()
+                    completion(nil)
                 } catch {
-                    self.error = error
-                    print(error.localizedDescription)
+                    completion(.invalidResponse)
                 }
             case .failure(let error):
-                self.error = error
-                print(error.localizedDescription)
+                completion(error)
             }
         })
     }
 
     // Atualiza o account
-    func updateTokenInformation(completion: @escaping () -> Void) {
+    func updateTokenInformation(completion: @escaping (CustomErrors?) -> Void) {
         tokenService.getTokenInformation(completion: { result in
             switch result {
             case .success(let data):
                 do {
                     _ = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     self.account = try JSONDecoder().decode(Account.self, from: data)
-                    completion()
+                    completion(nil)
                 } catch {
-                    print(error)
+                    completion(.invalidResponse)
                 }
             case .failure(let error):
-                print(error)
+                completion(error)
             }
         })
     }
 
     // Função que verifica o token e atualiza caso necessário
-    func verifyToken(completion: @escaping () -> Void) {
-        self.updateTokenInformation {
+    func verifyToken(completion: @escaping (CustomErrors?) -> Void) {
+        self.updateTokenInformation { error in
             if self.account.expireTokenTime < 10 {
                 self.generateAccessToken(completion: completion)
             } else {
-                completion()
+                completion(error)
             }
         }
     }

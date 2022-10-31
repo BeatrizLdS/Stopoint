@@ -7,17 +7,12 @@
 
 import Foundation
 
-protocol TokenServiceProtocol {
-    func generateToken(completion: @escaping (Result<Data, Error>) -> Void)
-    func getTokenInformation(completion: @escaping (Result<Data, Error>) -> Void)
-}
-
 // Requisições relacionadas com as rotas (origem -> destino) / Origem = Fortaleza
 class API {
     let clientId = "xA37zqxGxLT6uiYMzhI4K3CaCpo1quXV"
     let clientSecret = "OmSjqbPHJYKvGRG7"
     // função responsável por pegar todas as rotas partindo de Fortaleza
-    func getRoutes(completion: @escaping (Result<Data, Error>) -> Void) {
+    func getRoutes(completion: @escaping (Result<Data, CustomErrors>) -> Void) {
         let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
         let accessToken = String(data: token, encoding: .utf8)!
         let url = Url.urlAirportRoutes
@@ -27,7 +22,7 @@ class API {
     }
 
     // Função que executa pesquisa de voos mais baratos para uma ocnfiguração de voo
-    func getFlightOffers(flight: Flight, completion: @escaping (Result<Data, Error>) -> Void) {
+    func getFlightOffers(flight: Flight, completion: @escaping (Result<Data, CustomErrors>) -> Void) {
         let url = Url.getUrlFlightOffersSearch(flight: flight)
         var request = URLRequest(url: url)
         let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
@@ -37,7 +32,7 @@ class API {
     }
 
     // Função que busca descrição de códigos de lugares
-    func getCityByKeyword(city: City, completion: @escaping (Result<Data, Error>) -> Void) {
+    func getCityByKeyword(city: City, completion: @escaping (Result<Data, CustomErrors>) -> Void) {
         let url = Url.getUrlLocationByKeyword(city: city)
         var request = URLRequest(url: url)
         let token = KeychainHelper.standard.read(service: "access-token", account: "amadeus")!
@@ -48,14 +43,14 @@ class API {
     }
 
     // Executa a requisição para a API
-    private func executeRequest(urlRequest: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
+    private func executeRequest(urlRequest: URLRequest, completion: @escaping (Result<Data, CustomErrors>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
 
             guard let data = data, error == nil else {
-                print("Entrou aqui")
-                completion(.failure(error!))
+                completion(.failure(CustomErrors.invalidRequest))
                 return
             }
+//            completion(.failure(CustomErrors.invalidRequest))
             completion(.success(data))
 
         })
@@ -65,7 +60,7 @@ class API {
 
 extension API: TokenServiceProtocol {
     // função responsável por gerar um token de acesso na API
-    func generateToken(completion: @escaping (Result<Data, Error>) -> Void) {
+    func generateToken(completion: @escaping (Result<Data, CustomErrors>) -> Void) {
         let url = Url.urlGenerateAcessToken
         print(url)
         let parameters = "grant_type=client_credentials&client_id=\(clientId)&client_secret=\(clientSecret)"
@@ -79,7 +74,7 @@ extension API: TokenServiceProtocol {
     }
 
     // função responsável por atualizar informações de token
-    func getTokenInformation(completion: @escaping (Result<Data, Error>) -> Void) {
+    func getTokenInformation(completion: @escaping (Result<Data, CustomErrors>) -> Void) {
         let url = Url.urlGetTokenInformation
         let request = URLRequest(url: url)
         executeRequest(urlRequest: request, completion: completion)
