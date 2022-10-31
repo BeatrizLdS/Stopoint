@@ -52,8 +52,8 @@ extension RoutesViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RouteTableViewCell.identifier, for: indexPath) as? RouteTableViewCell else {
             return UITableViewCell()
         }
-        cell.routeComponent.originLabel.text = "Fortaleza"
-        cell.routeComponent.destinyLabel.text = viewModel?.loadCurrentRoute(indexPath: indexPath).name?.capitalizeFirstLetter()
+        let currentRoute = viewModel?.loadCurrentRoute(indexPath: indexPath)
+        cell.configure(location: currentRoute!)
         return cell
     }
 
