@@ -63,6 +63,11 @@ class RouteTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
 
+    public func configure(location: Location) {
+        self.routeComponent.originLabel.text = "Fortaleza"
+        self.routeComponent.destinyLabel.text = location.name?.capitalizeFirstLetter()
+    }
+
     private func setConstraints() {
         let containerStackViewConstraints = [
             routeComponent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
